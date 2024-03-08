@@ -1,6 +1,9 @@
-package com.energygame.mcqapplication.Controllers;
+package com.energygame.mcqapplication.Controller;
 
 
+import com.energygame.mcqapplication.Model.User;
+import com.energygame.mcqapplication.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,6 +14,17 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class UserController {
+    private final UserService userService;
+
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/{userId}")
+    public User getUserById(@PathVariable Long userId) {
+        return userService.getUserById(userId);
+    }
 
     @PostMapping("/receiveUserId")
     public ResponseEntity<String> receiveUserId(@RequestBody Map<String, Object> payload) {
