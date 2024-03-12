@@ -12,7 +12,7 @@ import java.util.Map;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/energy-quest/user")
 public class UserController {
     private final UserService userService;
 
@@ -21,26 +21,28 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/{userId}")
-    public User getUserById(@PathVariable Long userId) {
-        return userService.getUserById(userId);
+    @PostMapping
+    public User saveUser(@RequestBody User user) {
+        return userService.saveUser(user);
     }
 
-    @PostMapping("/receiveUserId")
-    public ResponseEntity<String> receiveUserId(@RequestBody Map<String, Object> payload) {
-        try {
-            // Extract user_id from the payload
-            int userId = (int) payload.get("user_id");
-            return ResponseEntity.ok("User_id received successfully");
+    @GetMapping("/token/{jwtToken}")
+    public User getUserByToken(@PathVariable String jwtToken) {
+        return userService.getUserByToken(jwtToken);
+    }
 
-            // Now you can use the userId as needed (e.g., save it to the database, perform actions, etc.)
+    @GetMapping("/id/{user_id}")
+    public User getUserById(@PathVariable long user_id) {
+        return userService.getUserById(user_id);
+    }
+    @PostMapping("profile/{user_id}")
+    public User updateProfileStatus(@PathVariable int user_id) {
+        return userService.updateProfileStatus(user_id);
+    }
 
-            // Return a success response
-            
-        } catch (Exception e) {
-            // Handle any exceptions or errors
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing user_id");
-        }
+    @PostMapping("questionnaire/{user_id}")
+    public User updateQuestionnaireStatus(@PathVariable int user_id) {
+        return userService.updateQuestionnaireStatus(user_id);
     }
 }
 

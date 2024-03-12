@@ -1,12 +1,13 @@
 package com.energygame.mcqapplication.Controller;
 
+import com.energygame.mcqapplication.Dto.QuizDto;
 import com.energygame.mcqapplication.Model.Quiz;
 import com.energygame.mcqapplication.Service.QuizService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,4 +28,16 @@ public class QuizController {
     }
 
 
+    @PostMapping("/add")
+    public ResponseEntity<String> addQuestion(@RequestBody QuizDto quizDto) {
+        // Assume QuizDto is a DTO (Data Transfer Object) representing the question details
+        // You can create a QuizDto class with fields like question, correctAnswer, otherOptions, etc.
+
+        // Perform any necessary validation or business logic
+
+        // Call the service to save the question
+        quizService.saveQuestion(quizDto);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body("Question added successfully");
+    }
 }
