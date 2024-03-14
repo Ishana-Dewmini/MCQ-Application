@@ -26,5 +26,8 @@ public class User {
     @Column(name = "questionnaire_taken")
     private boolean questionnaireTaken;
 
+    @Column(name = "questionnaire_score")
+    private Integer questionnaireScore;
+
     // Getters and setters
 }

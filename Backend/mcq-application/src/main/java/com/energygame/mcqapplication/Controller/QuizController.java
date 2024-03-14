@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/quizzes")
+@RequestMapping("/energy-quest/quizzes")
 public class QuizController {
 
     private final QuizService quizService;
