@@ -25,6 +25,7 @@ public class ResponseController {
         this.userService = userService;
     }
 
+    // add a response to database
     @PostMapping("/save")
     public ResponseEntity<String> saveResponse(@RequestBody ResponseDto responseDto) {
         try {
@@ -35,6 +36,7 @@ public class ResponseController {
         }
     }
 
+    // get all response of a selected user
     @GetMapping("/all/{userId}")
     public ResponseEntity<List<ResponseWithCorrectAnswerDto>> getAllResponsesForUser(@PathVariable Long userId) {
         try {
@@ -46,6 +48,7 @@ public class ResponseController {
     }
 
 
+    // get the mcq score of a selected user
     @GetMapping("/mcqScore/{user_id}")
     public ResponseEntity<Integer> calculateScore(@PathVariable("user_id") Long userId) {
         // Logic to check if questionnaire_score is already calculated for the user

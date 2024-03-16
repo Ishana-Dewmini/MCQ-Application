@@ -24,6 +24,6 @@ public class Response {
     @Column(name = "given_answer", nullable = false)
     private String givenAnswer;
 
-    // Getters and setters
+
 }
 

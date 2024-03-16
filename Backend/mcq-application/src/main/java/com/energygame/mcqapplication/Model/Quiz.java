@@ -23,5 +23,5 @@ public class Quiz {
     @Column(name = "other_options", nullable = false)
     private String otherOptions;
 
-    // Getters and setters
+
 }

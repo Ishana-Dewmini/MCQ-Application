@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+
 @RequestMapping("/energy-quest/quizzes")
 public class QuizController {
 
@@ -22,12 +23,14 @@ public class QuizController {
         this.quizService = quizService;
     }
 
+    // get all questions from the data base
     @GetMapping
     public List<Quiz> getAllQuizzes() {
         return quizService.getAllQuizzes();
     }
 
 
+    // add a question to database
     @PostMapping("/add")
     public ResponseEntity<String> addQuestion(@RequestBody QuizDto quizDto) {
         // Assume QuizDto is a DTO (Data Transfer Object) representing the question details

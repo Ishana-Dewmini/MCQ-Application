@@ -29,5 +29,5 @@ public class User {
     @Column(name = "questionnaire_score")
     private Integer questionnaireScore;
 
-    // Getters and setters
+
 }
