@@ -23,7 +23,7 @@ public class QuizController {
         this.quizService = quizService;
     }
 
-    // get all questions from the data base
+    // get all questions from the database
     @GetMapping
     public List<Quiz> getAllQuizzes() {
         return quizService.getAllQuizzes();
