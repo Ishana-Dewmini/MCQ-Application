@@ -27,7 +27,7 @@ public class User {
     private boolean questionnaireTaken;
 
     @Column(name = "questionnaire_score")
-    private Integer questionnaireScore;
+    private Integer questionnaireScore = null;
 
 
 }

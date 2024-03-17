@@ -5,13 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55c1198-862d-4c44-ab07-d304c690ca2f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/exception/ResourceNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Controller/QuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Controller/QuizController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Service/QuizService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Service/QuizService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Service/UserService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -20,7 +32,7 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
@@ -35,13 +47,14 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "Application.McqApplication.executor": "Run",
+    "Maven.mcq-application [clean].executor": "Run",
     "Maven.mcq-application [install].executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "Rajana",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "F:/Learnings/Udemy/Web Development/Todo Management System",
-    "settings.editor.selected.configurable": "project.propCompiler"
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RunManager">

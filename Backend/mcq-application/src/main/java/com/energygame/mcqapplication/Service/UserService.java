@@ -3,6 +3,7 @@ package com.energygame.mcqapplication.Service;
 import com.energygame.mcqapplication.Dto.ResponseWithCorrectAnswerDto;
 import com.energygame.mcqapplication.Model.User;
 import com.energygame.mcqapplication.Repository.UserRepository;
+import com.energygame.mcqapplication.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,7 +39,7 @@ public class UserService {
 
     public User updateProfileStatus(long user_id) {
         // Fetch the user from the repository
-        User user = userRepository.findById(user_id).orElse(null);
+        User user = userRepository.findById(user_id).orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: "+user_id));
 
         // Check if the user exists
         if (user != null) {
@@ -58,7 +59,7 @@ public class UserService {
 
     public User updateQuestionnaireStatus(long user_id) {
         // Fetch the user from the repository
-        User user = userRepository.findById(user_id).orElse(null);
+        User user = userRepository.findById(user_id).orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: "+user_id));
 
         // Check if the user exists
         if (user != null) {
@@ -78,23 +79,23 @@ public class UserService {
 
     public Integer getQuestionnaireScore(Long userId) {
         // Retrieve the user by userId
-        User user = userRepository.findById(userId).orElse(null);
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: "+userId));
 
         // Check if the user exists and if the questionnaire_score is calculated
         if (user != null && user.getQuestionnaireScore() != null) {
             return user.getQuestionnaireScore();
         }
-
         // Return null if the user or questionnaire_score is not found
         return null;
     }
 
     public boolean isUserQuestionnaireTaken(Long userId) {
         // Retrieve the user by userId
-        User user = userRepository.findById(userId).orElse(null);
+        User user = userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("Todo not found with id: "+userId));
+        assert user != null;
 
         // Check if the user exists and if the questionnaire_taken flag is true
-        return user != null && user.isQuestionnaireTaken();
+        return user.isQuestionnaireTaken();
     }
 
     public int calculateAndStoreQuestionnaireScore(Long userId) {
