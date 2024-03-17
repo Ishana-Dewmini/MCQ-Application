@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55c1198-862d-4c44-ab07-d304c690ca2f" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/exception/ResourceNotFoundException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Service/QuizService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Service/QuizService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/mcq-application/src/main/java/com/energygame/mcqapplication/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quiz-frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/quiz-frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quiz-frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/quiz-frontend/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quiz-frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/quiz-frontend/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quiz-frontend/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/quiz-frontend/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quiz-frontend/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/quiz-frontend/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/quiz-frontend/vite.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/quiz-frontend/vite.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,21 +42,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Application.McqApplication.executor": "Run",
-    "Maven.mcq-application [clean].executor": "Run",
-    "Maven.mcq-application [install].executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Rajana",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "F:/Learnings/Udemy/Web Development/Todo Management System",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;Application.McqApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Maven.mcq-application [clean].executor&quot;: &quot;Run&quot;,
+    &quot;Maven.mcq-application [install].executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Rajana&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;F:/Learnings/Udemy/Web Development/Todo Management System&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="MCQ-Application" />
