@@ -5,14 +5,14 @@ $bg-accent: #e7e8e9;
 $disabled: #9c9c9c;
 $foreground: #2d264b;
 
-body {
+body{
   font-family: monospace;
   background: linear-gradient(0deg, $primary 0.03%, $accent);
   color: $foreground;
   display: flex;
-  justify-content: center;
   margin: 0 auto;
   padding: 0 30px;
+  justify-content:center;
   height: 100vh;
 }
 
@@ -66,16 +66,6 @@ body {
     }
   }
 
-  // .footer {
-  //   position: fixed;
-  //   left: 0;
-  //   bottom: 0;
-  //   width: 100%;
-  //   background-color: red;
-  //   color: white;
-  //   text-align: center;
-  // }
-
   button {
     background: linear-gradient(0deg, $primary 0.05%, $accent);
     border-radius: 20px;
@@ -95,23 +85,24 @@ body {
   }
 
 
-  // .result {
-  //   text-align: center;
+  .result {
+    text-align: center;
 
-  //   h3 {
-  //     font-size: 24px;
-  //     letter-spacing: 1.4px;
-  //     text-align: center;
-  //   }
+    h3 {
+      font-size: 24px;
+      letter-spacing: 1.4px;
+      text-align: center;
+    }
 
-  //   p {
-  //     font-size: 16px;
-  //     font-weight: 500;
+    p {
+      font-size: 16px;
+      font-weight: 500;
 
-  //     span {
-  //       color: $primary;
-  //       font-size: 22px;
-  //     }
-  //   }
-  // }
+      span {
+        color: $primary;
+        font-size: 22px;
+      }
+    }
+  }
 }
+
