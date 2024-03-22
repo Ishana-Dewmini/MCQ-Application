@@ -1,19 +1,21 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState} from 'react'
 import Button from '@mui/material/Button';
-import { resultInitalState } from '../questions/Questions';
-import FooterComponent from './FooterComponent';
+import { resultInitalState } from '../../questions/Questions';
 import { useNavigate } from 'react-router-dom';
+import './Quiz.scss'
+
 
 const Quiz = ({ questions }) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(1)
   const [answerIdx, setAnswerIdx] = useState(null)
-  const [answer, setAnswer] = useState(null)
+  const [answer, setAnswer] = useState()
   const [result, setResult] = useState(resultInitalState)
-  const [showResult, setShowResult] = useState(false)
+  const [reviewData, setReviewData] = useState([])
 
   const navigate = useNavigate();
-  const { question, choices, correctAnswer } = questions[currentQuestion]
+
+  const { question, choices, correctAnswer } = questions[currentQuestion-1]
 
   const onAnswerClick = (answer, index) => {
     setAnswerIdx(index)
@@ -25,12 +27,12 @@ const Quiz = ({ questions }) => {
   }
 
   const onClickNext = () => {
+
     setAnswerIdx(null);
     setResult((prev) => 
       answer
       ? { 
         ...prev, 
-        score: prev.score + 5 ,
         correctAnswers: prev.correctAnswers + 1
       } : {
         ...prev,
@@ -38,20 +40,27 @@ const Quiz = ({ questions }) => {
       }
       );
 
-    if (currentQuestion < questions.length - 1) {
+    reviewData.push({
+      question : currentQuestion ,
+      answer : answer
+    })
+  
+    setReviewData(reviewData);
+      
+    if (currentQuestion < questions.length) {
       setCurrentQuestion((prev) => prev + 1);
     } 
     else {
-      navigate('/review');
-      setCorrectQuestion(0);
-      setShowResult(true);
+      setCurrentQuestion(1);
+      navigate('/review', { state: { results: reviewData } });
     }
 
   };
 
   return (
+    
       <div className='quiz-container'>
-        <span className='active-question-no'>{currentQuestion + 1 }</span>
+        <span className='active-question-no'>{currentQuestion }</span>
         <span className='total-question'>/{ questions.length }</span>
         <h2>{ question }</h2>
         <ul>
@@ -66,12 +75,15 @@ const Quiz = ({ questions }) => {
                 </li>
               ))}
         </ul>
+
         <center>
           <Button variant="contained" color="primary" onClick={onClickNext} disabled = {answerIdx === null}>
-              {currentQuestion == questions.length - 1 ? "Finish" : "Next"}
+              {currentQuestion == questions.length ? "Finish" : "Next"}
           </Button> 
         </center>
-      </div>     
+
+      </div>  
+      
   )
 }
 
