@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState} from 'react'
 import Button from '@mui/material/Button';
-import { resultInitalState } from '../../questions/Questions';
 import { useNavigate } from 'react-router-dom';
 import './Quiz.scss'
 
@@ -10,16 +9,15 @@ const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(1)
   const [answerIdx, setAnswerIdx] = useState(null)
   const [answer, setAnswer] = useState()
-  const [result, setResult] = useState(resultInitalState)
   const [reviewData, setReviewData] = useState([])
 
   const navigate = useNavigate();
 
   const { question, choices, correctAnswer } = questions[currentQuestion-1]
 
-  const onAnswerClick = (answer, index) => {
+  const onAnswerClick = (choice, index) => {
     setAnswerIdx(index)
-    if (answer === correctAnswer) {
+    if (choice === correctAnswer) {
       setAnswer(true);
     } else {
       setAnswer(false);
@@ -27,22 +25,12 @@ const Quiz = ({ questions }) => {
   }
 
   const onClickNext = () => {
-
+    const selectedAnswer = choices[answerIdx];
     setAnswerIdx(null);
-    setResult((prev) => 
-      answer
-      ? { 
-        ...prev, 
-        correctAnswers: prev.correctAnswers + 1
-      } : {
-        ...prev,
-        wrongAnswers: prev.wrongAnswers + 1
-      }
-      );
-
     reviewData.push({
       question : currentQuestion ,
-      answer : answer
+      answer : answer,
+      selectedAnswer : selectedAnswer
     })
   
     setReviewData(reviewData);

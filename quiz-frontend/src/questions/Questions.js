@@ -113,8 +113,3 @@ export const quizQuestions = {
       
     ],
   };
-  
-export const resultInitalState = {
-  correctAnswers: 0,
-  wrongAnswers: 0,
-};
