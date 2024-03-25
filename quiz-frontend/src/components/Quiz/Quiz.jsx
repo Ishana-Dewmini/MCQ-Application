@@ -42,7 +42,6 @@ const Quiz = ({ questions }) => {
       setCurrentQuestion(1);
       navigate('/review', { state: { results: reviewData } });
     }
-
   };
 
   return (

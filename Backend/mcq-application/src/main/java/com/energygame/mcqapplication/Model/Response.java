@@ -1,29 +1,35 @@
 package com.energygame.mcqapplication.Model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.modelmapper.spi.Mapping;
+
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "response")
-@IdClass(ResponseId.class)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Response {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "question_no", nullable = false)
+    private Integer question;
+
+    @Column(name = "answer", nullable = false)
+    private boolean answer;
+
+    @Column(name = "selectedAnswer", nullable = false)
+    private String selectedAnswer;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Quiz question;
-
-    @Column(name = "given_answer", nullable = false)
-    private String givenAnswer;
-
 
 }
 

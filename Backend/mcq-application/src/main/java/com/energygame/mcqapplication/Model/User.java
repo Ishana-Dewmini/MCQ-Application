@@ -1,33 +1,38 @@
 package com.energygame.mcqapplication.Model;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "user")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private Integer userId;
+    private Long userId;
 
-    @Column(name = "user_name", nullable = false)
-    private String userName;
+    @Column(name = "api_key", nullable = false)
+    private String apiKey;
 
-    @Column(name = "jwt_token")
-    private String jwtToken;
+    @Column(name = "profile_completed")
+    private boolean profileCompleted;
 
-    @Column(name = "profile_edited")
-    private boolean profileEdited;
+    @Column(name = "questionnaire_completed")
+    private boolean questionnaireCompleted;
 
-    @Column(name = "questionnaire_taken")
-    private boolean questionnaireTaken;
+    @Column(name = "user_marks")
+    private Integer userMarks;
 
-    @Column(name = "questionnaire_score")
-    private Integer questionnaireScore;
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Response> responses;
 
 }

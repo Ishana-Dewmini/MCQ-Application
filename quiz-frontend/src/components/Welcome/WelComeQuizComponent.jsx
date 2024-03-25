@@ -11,7 +11,7 @@ const WelComeQuizComponent = () => {
   return (
     <div>
       <h1>
-        Welcome to <span>Bert Quiz</span>
+        Welcome to <span>Energy Saving Game Questionnaire</span>
       </h1>
 
       <button

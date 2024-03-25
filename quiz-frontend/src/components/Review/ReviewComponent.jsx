@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { quizQuestions } from '../../questions/Questions';
 import '../Quiz/Quiz.scss';
 
@@ -8,7 +8,19 @@ const ReviewComponent = () => {
   const [answers, setAnswers] = useState(location.state.results);
   const [reviewedQuestions, setReviewedQuestions] = useState([]);
 
+  const { id } = useParams();
+
   useEffect(() => {
+    // if (id) 
+    // {
+    //   getAnswers(id).then((data) => {
+    //     setAnswers(data);
+    //   }).catch((error) => {
+    //     console.error('Error:', error);
+    //   });
+    // }
+    console.log(answers);
+
     const reviewed = answers.map(item => {
       const questionIndex = item.question - 1; // Adjust index to match array indexing
       const question = quizQuestions.questions[questionIndex].question;
@@ -21,6 +33,7 @@ const ReviewComponent = () => {
         correctAnswer: quizQuestions.questions[questionIndex].correctAnswer
       };
     });
+
     setReviewedQuestions(reviewed);
   }, [answers]);
   
