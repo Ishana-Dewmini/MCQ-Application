@@ -17,8 +17,8 @@ public class User {
     @Column(name = "user_name", nullable = false)
     private String userName;
 
-    @Column(name = "jwt_token")
-    private String jwtToken;
+    @Column(name = "API_key")
+    private String apiKey;
 
     @Column(name = "profile_edited")
     private boolean profileEdited;

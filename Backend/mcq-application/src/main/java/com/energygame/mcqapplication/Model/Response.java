@@ -8,22 +8,14 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "response")
-@IdClass(ResponseId.class)
 public class Response {
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column(name = "user_id")
+    private Integer userId;
 
-    @Id
-    @ManyToOne
-    @JoinColumn(name = "question_id")
-    private Quiz question;
-
-    @Column(name = "given_answer", nullable = false)
-    private String givenAnswer;
+    @Column(name = "response", columnDefinition = "JSON")
+    private String responseJson;
 
 
 }
-
