@@ -1,16 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import './Welcome.scss';
+import WelcomeAnim from '../WelcomeAnimation/Anim';
 
 const WelcomeQuizComponent = () => {
   const navigate = useNavigate();
+  const [showAnim, setShowAnim] = React.useState(true);
 
   const handleBegin = () => {
     navigate("/quiz");
   };
 
+  useEffect(() => {
+    
+    document.querySelector('body').style.overflow = 'hidden';
+    document.querySelector('body').scrollTo(0, 0);
+
+    setTimeout(() => {
+      
+      document.querySelector('body').style.overflow = 'auto';
+      setShowAnim(false);
+      
+    }, 3000);
+  
+
+  }, [])
+
   return (
+    <>
+    <WelcomeAnim showAnim={showAnim}/>
+
     <div>
       <h1 className='container1'>
         Welcome to <span>Energy Saving Game Questionnaire</span>
@@ -38,6 +58,8 @@ const WelcomeQuizComponent = () => {
         Begin Test
       </Button>
     </div>
+
+    </>
   );
 };
 
