@@ -1,5 +1,6 @@
 import '../WelcomeAnimation/anim.scss'
 
+
 const WelcomeAnim = (props) => {
 
     const {showAnim} = props;

@@ -1,31 +1,46 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import React, { useEffect,useState } from 'react';
+import { useNavigate, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
-import './Welcome.scss';
 import WelcomeAnim from '../WelcomeAnimation/Anim';
+import { isQuizCompleted } from '../../services/ResponseService';
+import './Welcome.scss';
+
 
 const WelcomeQuizComponent = () => {
   const navigate = useNavigate();
-  const [showAnim, setShowAnim] = React.useState(true);
+  const [showAnim, setShowAnim] = useState(true);
+  const [quizCompleted, setQuizCompleted] = useState(true);
 
-  const handleBegin = () => {
-    navigate("/quiz");
-  };
+  const {id} = useParams();
 
   useEffect(() => {
-    
+
+    isQuizCompleted(id).then((response) => {
+      setQuizCompleted(response.data);
+    });
+
+    if (quizCompleted) {
+      console.log("Quiz already completed");
+      navigate("/review");
+    }
+
+    else {
+
     document.querySelector('body').style.overflow = 'hidden';
     document.querySelector('body').scrollTo(0, 0);
 
     setTimeout(() => {
       
-      document.querySelector('body').style.overflow = 'auto';
-      setShowAnim(false);
+    document.querySelector('body').style.overflow = 'auto';
+    setShowAnim(false);
       
     }, 3000);
-  
-
+  }
   }, [])
+
+  const handleBegin = () => {
+    navigate("/quiz");
+  };
 
   return (
     <>

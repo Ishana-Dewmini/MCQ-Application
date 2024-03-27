@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState} from 'react'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+
 import './Quiz.scss'
 
 
@@ -13,6 +14,7 @@ const Quiz = ({ questions }) => {
   const navigate = useNavigate();
 
   const { question, choices, correctAnswer } = questions[currentQuestion-1]
+
 
   const onAnswerClick = (selectedIndex) => {
     setAnswerIdx(selectedIndex)
@@ -33,6 +35,8 @@ const Quiz = ({ questions }) => {
       navigate('/review', { state: { results: reviewData } });
     }
   };
+
+
 
   return (
     
