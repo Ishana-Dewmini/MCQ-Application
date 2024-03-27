@@ -9,7 +9,7 @@ import './Welcome.scss';
 const WelcomeQuizComponent = () => {
   const navigate = useNavigate();
   const [showAnim, setShowAnim] = useState(true);
-  const [quizCompleted, setQuizCompleted] = useState(true);
+  const [quizCompleted, setQuizCompleted] = useState(false);
 
   const {id} = useParams();
 
