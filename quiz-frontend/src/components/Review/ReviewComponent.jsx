@@ -25,12 +25,16 @@ const ReviewComponent = () => {
       const questionIndex = item.question - 1; // Adjust index to match array indexing
       const question = quizQuestions.questions[questionIndex].question;
       const choices = quizQuestions.questions[questionIndex].choices;
+      const GeneralFeedback = quizQuestions.questions[questionIndex].GeneralFeedback;
+      //const SpecificFeedback = quizQuestions.questions[questionIndex].SpecificFeedback[];
       return {
         question,
         choices,
         answerStatus: item.answer,
         givenAnswer: item.selectedAnswer,
-        correctAnswer: quizQuestions.questions[questionIndex].correctAnswer
+        correctAnswer: quizQuestions.questions[questionIndex].correctAnswer,
+        GeneralFeedback,
+        //SpecificFeedback
       };
     });
 
@@ -53,6 +57,8 @@ const ReviewComponent = () => {
         <p className="review-given-answer">{`Given Answer: ${item.givenAnswer}`}</p>
         <p className="review-correct-answer">{`Correct Answer: ${item.correctAnswer}`}</p>
         <p className="review-correctness">{`Your answer is ${item.answerStatus ? 'correct' : 'wrong'}`}</p>
+        <p className="General-feedback">{`General Feedback: ${item.GeneralFeedback}`}</p>
+        <p className="Specific-feedback">{`Specific Feedback: ${item.givenAnswer}`}</p>
       </div>
     ));
   };
