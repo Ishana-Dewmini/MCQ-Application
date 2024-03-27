@@ -8,30 +8,20 @@ import './Quiz.scss'
 const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(1)
   const [answerIdx, setAnswerIdx] = useState(null)
-  const [answer, setAnswer] = useState()
   const [reviewData, setReviewData] = useState([])
 
   const navigate = useNavigate();
 
   const { question, choices, correctAnswer } = questions[currentQuestion-1]
 
-  const onAnswerClick = (choice, index) => {
-    setAnswerIdx(index)
-    if (choice === correctAnswer) {
-      setAnswer(true);
-    } else {
-      setAnswer(false);
-    }
+  const onAnswerClick = (selectedIndex) => {
+    setAnswerIdx(selectedIndex)
   }
 
   const onClickNext = () => {
-    const selectedAnswer = choices[answerIdx];
+    const selectedAnswer = answerIdx +1;
     setAnswerIdx(null);
-    reviewData.push({
-      question : currentQuestion ,
-      answer : answer,
-      selectedAnswer : selectedAnswer
-    })
+    reviewData.push(selectedAnswer);
   
     setReviewData(reviewData);
       
@@ -54,7 +44,7 @@ const Quiz = ({ questions }) => {
         { 
           choices.map((choice, index) => (
                 <li
-                  onClick={() => onAnswerClick(choice, index)}
+                  onClick={() => onAnswerClick(index)}
                   key={choice}
                   className={answerIdx === index ? "selected-answer" : null}
                 >

@@ -19,22 +19,23 @@ const ReviewComponent = () => {
     //     console.error('Error:', error);
     //   });
     // }
-    console.log(answers);
 
-    const reviewed = answers.map(item => {
-      const questionIndex = item.question - 1; // Adjust index to match array indexing
+    const reviewed = answers.map((item,index) => {
+      const questionIndex = index; // Adjust index to match array indexing
       const question = quizQuestions.questions[questionIndex].question;
       const choices = quizQuestions.questions[questionIndex].choices;
-      const GeneralFeedback = quizQuestions.questions[questionIndex].GeneralFeedback;
-      //const SpecificFeedback = quizQuestions.questions[questionIndex].SpecificFeedback[];
+      const correctAnswer = quizQuestions.questions[questionIndex].correctAnswer;
+      const correctAnswerStr = choices[correctAnswer -1];
+      const generalFeedback = quizQuestions.questions[questionIndex].generalFeedback;
+      const specificFeedback = quizQuestions.questions[questionIndex].specificFeedback[item-1];
       return {
         question,
         choices,
-        answerStatus: item.answer,
-        givenAnswer: item.selectedAnswer,
-        correctAnswer: quizQuestions.questions[questionIndex].correctAnswer,
-        GeneralFeedback,
-        //SpecificFeedback
+        givenAnswer: choices[item-1],
+        correctAnswer: correctAnswerStr,
+        answerStatus: item === correctAnswer,
+        generalFeedback,
+        specificFeedback,
       };
     });
 
@@ -42,6 +43,7 @@ const ReviewComponent = () => {
   }, [answers]);
   
   const renderReviewItems = () => {
+    console.log(reviewedQuestions);
     return reviewedQuestions.map((item, index) => (
       <div key={index} className="review-item">
         <p className="review-question">{`Question ${index + 1}: ${item.question}`}</p>
@@ -57,8 +59,8 @@ const ReviewComponent = () => {
         <p className="review-given-answer">{`Given Answer: ${item.givenAnswer}`}</p>
         <p className="review-correct-answer">{`Correct Answer: ${item.correctAnswer}`}</p>
         <p className="review-correctness">{`Your answer is ${item.answerStatus ? 'correct' : 'wrong'}`}</p>
-        <p className="General-feedback">{`General Feedback: ${item.GeneralFeedback}`}</p>
-        <p className="Specific-feedback">{`Specific Feedback: ${item.givenAnswer}`}</p>
+        <p className="review-general-feedback">{`General Feedback: ${item.generalFeedback}`}</p>
+        <p className="review-specific-feedback">{`Specific Feedback: ${item.specificFeedback}`}</p>
       </div>
     ));
   };
@@ -68,8 +70,8 @@ const ReviewComponent = () => {
     
   }
 
-  let correctAnswerCount = answers.filter(e => e.answer == true).length;
-  let wrongAnswerCount = answers.filter(e => e.answer == false).length;
+  let correctAnswerCount = reviewedQuestions.filter(e => e.answerStatus == true).length;
+  let wrongAnswerCount = reviewedQuestions.filter(e => e.answerStatus == false).length;
 
   return (
     <div className='text-center'>
