@@ -13,14 +13,15 @@ public class ResponseService {
     @Autowired
     private ResponseRepository responseRepository;
 
-    public void saveResponse(Integer userId, String responseJson) {
+    public void saveResponse(Integer userId, String responseObj) {
         Response response = new Response();
         response.setUserId(userId);
-        response.setResponseJson(responseJson);
+        response.setResponse(responseObj);
         responseRepository.save(response);
     }
+
     public String getResponseByUserId(Integer userId) {
         Optional<Response> optionalResponse = responseRepository.findById(Long.valueOf(userId));
-        return optionalResponse.map(Response::getResponseJson).orElse(null);
+        return optionalResponse.map(Response::getResponse).orElse(null);
     }
 }

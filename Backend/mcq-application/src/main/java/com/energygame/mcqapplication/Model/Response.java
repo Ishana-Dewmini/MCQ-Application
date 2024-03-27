@@ -14,8 +14,8 @@ public class Response {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "response", columnDefinition = "JSON")
-    private String responseJson;
+    @Column(name = "response", columnDefinition = "TEXT")
+    private String response;
 
 
 }

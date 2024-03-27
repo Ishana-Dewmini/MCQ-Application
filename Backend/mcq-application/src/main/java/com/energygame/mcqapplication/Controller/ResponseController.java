@@ -26,8 +26,8 @@ public class ResponseController {
     @GetMapping("/responses/{userId}")
     public ResponseEntity<String> getResponse(@PathVariable("userId") Integer userId) {
         try {
-            String responseJson = responseService.getResponseByUserId(userId);
-            return ResponseEntity.ok(responseJson);
+            String response = responseService.getResponseByUserId(userId);
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to retrieve response: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }

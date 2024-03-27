@@ -14,9 +14,6 @@ public class User {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "user_name", nullable = false)
-    private String userName;
-
     @Column(name = "API_key")
     private String apiKey;
 
