@@ -10,7 +10,7 @@ export const quizQuestions = {
           "Hydropower",
         ],
         type: "MCQs",
-        correctAnswer: "Fossil fuels",
+        correctAnswer: 3,
       },
       {
         question: "How does electricity typically travel from power plants to consumers?",
@@ -21,7 +21,7 @@ export const quizQuestions = {
           "Through the internet",
         ],
         type: "MCQs",
-        correctAnswer: "Via transmission and distribution networks",
+        correctAnswer: 2,
       },
       {
         question:
@@ -31,7 +31,7 @@ export const quizQuestions = {
          "It reduces energy bills and environmental impact",
          "It has no impact on the environment"],
         type: "MCQs",
-        correctAnswer: "It reduces energy bills and environmental impact",
+        correctAnswer: 3,
       },
       {
         question: "What is the primary goal of demand management in energy usage?",
@@ -41,7 +41,7 @@ export const quizQuestions = {
           "To eliminate the use of renewable energy sources", 
           "To double the energy costs for consumers"],
         type: "MCQs",
-        correctAnswer: "To balance energy supply and demand",
+        correctAnswer: 2,
       },
       {
         question: "Which of the following is a common method used in demand management to encourage lower energy use during peak hours?",
@@ -52,7 +52,7 @@ export const quizQuestions = {
           "Discouraging the use of energy-efficient appliances",
         ],
         type: "MCQs",
-        correctAnswer: "Offering lower rates or incentives for using less energy during peak times",
+        correctAnswer: 3,
       },
       {
         question: "Benefits to the consumer from demand management include?",
@@ -63,7 +63,7 @@ export const quizQuestions = {
           "Reduced internet connectivity",
         ],
         type: "MCQs",
-        correctAnswer: "Savings on their electricity bill",
+        correctAnswer: 3,
       },
       {
         question: "How does implementing demand management strategies benefit the environment?",
@@ -74,7 +74,7 @@ export const quizQuestions = {
           "By discouraging the use of renewable energy",
         ],
         type: "MCQs",
-        correctAnswer: "By reducing reliance on fossil fuels and lowering carbon emissions",
+        correctAnswer: 2,
       },
       {
         question: "What can be a direct benefit of participating in a demand management program for consumers?",
@@ -85,7 +85,7 @@ export const quizQuestions = {
           "Reduced internet connectivity",
         ],
         type: "MCQs",
-        correctAnswer: "Savings on their electricity bill",
+        correctAnswer: 3,
       },
       {
         question: "Why is load shifting important in demand management?",
@@ -96,7 +96,7 @@ export const quizQuestions = {
           "It makes energy more expensive during off-peak hours",
         ],
         type: "MCQs",
-        correctAnswer: "It helps balance the power grid by using energy during lower-demand periods",
+        correctAnswer: 3,
       },
 
       {
@@ -108,7 +108,7 @@ export const quizQuestions = {
           "Data centers that require constant cooling",
         ],
         type: "MCQs",
-        correctAnswer: "Residential air conditioning units",
+        correctAnswer: 3,
       },
       
     ],

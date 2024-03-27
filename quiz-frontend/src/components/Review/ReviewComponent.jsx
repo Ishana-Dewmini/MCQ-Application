@@ -19,18 +19,19 @@ const ReviewComponent = () => {
     //     console.error('Error:', error);
     //   });
     // }
-    console.log(answers);
 
-    const reviewed = answers.map(item => {
-      const questionIndex = item.question - 1; // Adjust index to match array indexing
+    const reviewed = answers.map((item,index) => {
+      const questionIndex = index; // Adjust index to match array indexing
       const question = quizQuestions.questions[questionIndex].question;
       const choices = quizQuestions.questions[questionIndex].choices;
+      const correctAnswer = quizQuestions.questions[questionIndex].correctAnswer
+      const correctAnswerStr = choices[correctAnswer -1];
       return {
         question,
         choices,
-        answerStatus: item.answer,
-        givenAnswer: item.selectedAnswer,
-        correctAnswer: quizQuestions.questions[questionIndex].correctAnswer
+        givenAnswer: choices[item-1],
+        correctAnswer: correctAnswerStr,
+        answerStatus: item === correctAnswer
       };
     });
 
@@ -38,6 +39,7 @@ const ReviewComponent = () => {
   }, [answers]);
   
   const renderReviewItems = () => {
+    console.log(reviewedQuestions);
     return reviewedQuestions.map((item, index) => (
       <div key={index} className="review-item">
         <p className="review-question">{`Question ${index + 1}: ${item.question}`}</p>
@@ -62,8 +64,8 @@ const ReviewComponent = () => {
     
   }
 
-  let correctAnswerCount = answers.filter(e => e.answer == true).length;
-  let wrongAnswerCount = answers.filter(e => e.answer == false).length;
+  let correctAnswerCount = reviewedQuestions.filter(e => e.answerStatus == true).length;
+  let wrongAnswerCount = reviewedQuestions.filter(e => e.answerStatus == false).length;
 
   return (
     <div className='text-center'>
