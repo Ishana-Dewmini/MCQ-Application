@@ -11,16 +11,17 @@ const WelcomeQuizComponent = () => {
   const [showAnim, setShowAnim] = useState(true);
   const [quizCompleted, setQuizCompleted] = useState(false);
 
-  const {id} = useParams();
+  const { id } = useParams();
 
   useEffect(() => {
 
     isQuizCompleted(id).then((response) => {
       setQuizCompleted(response.data);
     });
+    console.log(quizCompleted);
 
     if (quizCompleted) {
-      console.log("Quiz already completed");
+      console.log(quizCompleted);
       navigate("/review");
     }
 

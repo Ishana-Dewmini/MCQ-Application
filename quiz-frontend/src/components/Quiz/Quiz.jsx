@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { useState} from 'react'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { saveResponses } from '../../services/ResponseService';
 
 import './Quiz.scss'
 
@@ -10,6 +11,8 @@ const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(1)
   const [answerIdx, setAnswerIdx] = useState(null)
   const [reviewData, setReviewData] = useState([])
+
+  const {id} = useParams();
 
   const navigate = useNavigate();
 
@@ -32,7 +35,12 @@ const Quiz = ({ questions }) => {
     } 
     else {
       setCurrentQuestion(1);
-      navigate('/review', { state: { results: reviewData } });
+      saveResponses(id,reviewData).then((response) => {
+        console.log(response.data)
+        navigate('/review', { state: { results: reviewData } });
+      }).catch(error => {
+          console.error(error);
+      })
     }
   };
 
