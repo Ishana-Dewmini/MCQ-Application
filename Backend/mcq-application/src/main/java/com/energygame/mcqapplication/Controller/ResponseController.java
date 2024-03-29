@@ -15,9 +15,9 @@ public class ResponseController {
     private ResponseService responseService;
 
     @PostMapping("/responses/{userId}")
-    public ResponseEntity<String> saveResponse(@PathVariable("userId") Integer userId, @RequestBody String responseJson) {
+    public ResponseEntity<String> saveResponse(@PathVariable("userId") Integer userId, @RequestBody Integer[] responseArray) {
         try {
-            responseService.saveResponse(userId, responseJson);
+            responseService.saveResponse(userId, responseArray);
             return new ResponseEntity<>("Response saved successfully", HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to save response: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
@@ -25,12 +25,13 @@ public class ResponseController {
     }
 
     @GetMapping("/responses/{userId}")
-    public ResponseEntity<String> getResponse(@PathVariable("userId") Integer userId) {
+    public ResponseEntity<Integer[]> getResponse(@PathVariable("userId") Integer userId) {
         try {
-            String response = responseService.getResponseByUserId(userId);
+            Integer[] response = responseService.getResponseByUserId(userId);
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            return new ResponseEntity<>("Failed to retrieve response: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
+
