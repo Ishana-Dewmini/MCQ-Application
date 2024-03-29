@@ -1,30 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { quizQuestions } from '../../questions/Questions';
-import '../Quiz/Quiz.scss';
-
+import { getResponses } from '../../services/ResponseService';
+import Button from '@mui/material/Button';
+// import '../Quiz/Quiz.scss';
+import './Review.scss';
 const ReviewComponent = () => {
   const location = useLocation(); 
   const [answers, setAnswers] = useState(location.state.results);
   const [reviewedQuestions, setReviewedQuestions] = useState([]);
 
+  const { id } = useParams();
+
   useEffect(() => {
-    const reviewed = answers.map(item => {
-      const questionIndex = item.question - 1; // Adjust index to match array indexing
+    if (id) 
+    {
+      getResponses(id).then((data) => {
+        setAnswers(data);
+      }).catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+
+    const reviewed = answers.map((item,index) => {
+      const questionIndex = index; // Adjust index to match array indexing
       const question = quizQuestions.questions[questionIndex].question;
       const choices = quizQuestions.questions[questionIndex].choices;
+      const correctAnswer = quizQuestions.questions[questionIndex].correctAnswer;
+      const correctAnswerStr = choices[correctAnswer -1];
+      const generalFeedback = quizQuestions.questions[questionIndex].generalFeedback;
+      const specificFeedback = quizQuestions.questions[questionIndex].specificFeedback[item-1];
       return {
         question,
         choices,
-        answerStatus: item.answer,
-        givenAnswer: item.selectedAnswer,
-        correctAnswer: quizQuestions.questions[questionIndex].correctAnswer
+        givenAnswer: choices[item-1],
+        correctAnswer: correctAnswerStr,
+        answerStatus: item === correctAnswer,
+        generalFeedback,
+        specificFeedback,
       };
     });
+
     setReviewedQuestions(reviewed);
   }, [answers]);
   
   const renderReviewItems = () => {
+    
     return reviewedQuestions.map((item, index) => (
       <div key={index} className="review-item">
         <p className="review-question">{`Question ${index + 1}: ${item.question}`}</p>
@@ -40,6 +61,8 @@ const ReviewComponent = () => {
         <p className="review-given-answer">{`Given Answer: ${item.givenAnswer}`}</p>
         <p className="review-correct-answer">{`Correct Answer: ${item.correctAnswer}`}</p>
         <p className="review-correctness">{`Your answer is ${item.answerStatus ? 'correct' : 'wrong'}`}</p>
+        <p className="review-general-feedback">{`General Feedback: ${item.generalFeedback}`}</p>
+        <p className="review-specific-feedback">{`Specific Feedback: ${item.specificFeedback}`}</p>
       </div>
     ));
   };
@@ -49,30 +72,36 @@ const ReviewComponent = () => {
     
   }
 
-  let correctAnswerCount = answers.filter(e => e.answer == true).length;
-  let wrongAnswerCount = answers.filter(e => e.answer == false).length;
+  let correctAnswerCount = reviewedQuestions.filter(e => e.answerStatus == true).length;
+  let wrongAnswerCount = reviewedQuestions.filter(e => e.answerStatus == false).length;
 
   return (
     <div className='text-center'>
-      <div className="quiz-container">
-        <h1>Result</h1>
-        <p>
-          Total Questions: <span>{reviewedQuestions.length}</span>
-        </p>
-        <p>
-          Total Score: <span>{correctAnswerCount * 10}</span>
-        </p>
-        <p>
-          Correct Answers: <span>{correctAnswerCount}</span>
-        </p>
-        <p>
-          Wrong Answers: <span>{wrongAnswerCount}</span>
-        </p>
-        <div className="review-section">
+        <div className="review-header">
+          <h1>Result</h1>
+          <br />
+          <p>
+            Total Questions: <span>{reviewedQuestions.length}</span>
+          </p>
+          <p>
+            Total Score: <span>{correctAnswerCount * 10}</span>
+          </p>
+          <p>
+            Correct Answers: <span>{correctAnswerCount}</span>
+          </p>
+          <p>
+            Wrong Answers: <span>{wrongAnswerCount}</span>
+          </p>
+        </div>
+      <div className="review-container">
           <h2>Review Answers:</h2>
           {renderReviewItems()}
-        </div>
-        <button onClick={gameEnvironment}>Go to Game Environment</button>
+
+        <center>
+          <Button variant="contained" color="primary" onClick={gameEnvironment}>
+          Go to Game Environment
+          </Button> 
+        </center>
       </div>
     </div>
   );

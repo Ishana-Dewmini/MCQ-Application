@@ -1,37 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState} from 'react'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
+import { quizCompleted, saveResponses } from '../../services/ResponseService';
+import { useParams } from 'react-router-dom';
+
 import './Quiz.scss'
 
 
 const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(1)
   const [answerIdx, setAnswerIdx] = useState(null)
-  const [answer, setAnswer] = useState()
   const [reviewData, setReviewData] = useState([])
+
+  const {id} = useParams();
 
   const navigate = useNavigate();
 
   const { question, choices, correctAnswer } = questions[currentQuestion-1]
 
-  const onAnswerClick = (choice, index) => {
-    setAnswerIdx(index)
-    if (choice === correctAnswer) {
-      setAnswer(true);
-    } else {
-      setAnswer(false);
-    }
+
+  const onAnswerClick = (selectedIndex) => {
+    setAnswerIdx(selectedIndex)
   }
 
   const onClickNext = () => {
-    const selectedAnswer = choices[answerIdx];
+    const selectedAnswer = answerIdx +1;
     setAnswerIdx(null);
-    reviewData.push({
-      question : currentQuestion ,
-      answer : answer,
-      selectedAnswer : selectedAnswer
-    })
+    reviewData.push(selectedAnswer);
   
     setReviewData(reviewData);
       
@@ -39,11 +35,19 @@ const Quiz = ({ questions }) => {
       setCurrentQuestion((prev) => prev + 1);
     } 
     else {
-      setCurrentQuestion(1);
-      navigate('/review', { state: { results: reviewData } });
+      //setCurrentQuestion(1);
+      // saveResponses(id,reviewData).then((response) => {
+      //   console.log(response.data)
+      //   quizCompleted(id)
+      //   navigate(`/review/${id}`, { state: { results: reviewData } });
+      // }).catch(error => {
+      //     console.error(error);
+      // })
+      navigate(`/review/${id}`, { state: { results: reviewData } });
     }
-
   };
+
+
 
   return (
     
@@ -55,7 +59,7 @@ const Quiz = ({ questions }) => {
         { 
           choices.map((choice, index) => (
                 <li
-                  onClick={() => onAnswerClick(choice, index)}
+                  onClick={() => onAnswerClick(index)}
                   key={choice}
                   className={answerIdx === index ? "selected-answer" : null}
                 >

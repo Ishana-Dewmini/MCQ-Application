@@ -1,0 +1,21 @@
+.container1 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  width: 500px;
+  background: #b5c83a;
+  border-radius: 20px;
+  margin-top: 80px;
+  padding: 20px 60px;
+  box-sizing: content-box;
+  align-items: center;
+}
+
+.container2 {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  width: 500px;
+  background: #8da7c2;
+  border-radius: 20px;
+  margin-top: 80px;
+  padding: 20px 60px;
+  box-sizing: content-box;
+  align-items: center;
+}/*# sourceMappingURL=Welcome.css.map */
