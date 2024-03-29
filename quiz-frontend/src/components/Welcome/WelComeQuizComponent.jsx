@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import WelcomeAnim from '../WelcomeAnimation/Anim';
-import { isQuizCompleted } from '../../services/ResponseService';
+import { isQuizCompleted, getResponses } from '../../services/ResponseService';
 import './Welcome.scss';
 
 
@@ -10,37 +10,45 @@ const WelcomeQuizComponent = () => {
   const navigate = useNavigate();
   const [showAnim, setShowAnim] = useState(true);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [reviewData, setReviewData] = useState([])
 
-  const { id } = useParams();
+  // const { id } = useParams();
+  const {id}  = 2;
 
   useEffect(() => {
 
     isQuizCompleted(id).then((response) => {
-      setQuizCompleted(response.data);
+      setQuizCompleted(response.data.questionnaireTaken);
+      console.log("Quiz completed? " + quizCompleted);
     });
-    console.log(quizCompleted);
 
-    if (quizCompleted) {
-      console.log(quizCompleted);
-      navigate("/review");
-    }
+
+    if (quizCompleted) {    
+          getResponses(id).then((data) => {
+          setReviewData(data);
+        }).catch((error) => {
+          console.error('Error:', error);
+        });
+
+        navigate(`/review/${id}`, { state: { results: reviewData } });
+      }
 
     else {
 
-    document.querySelector('body').style.overflow = 'hidden';
-    document.querySelector('body').scrollTo(0, 0);
+        document.querySelector('body').style.overflow = 'hidden';
+        document.querySelector('body').scrollTo(0, 0);
 
-    setTimeout(() => {
+        setTimeout(() => {
+          
+        document.querySelector('body').style.overflow = 'auto';
+        setShowAnim(false);
       
-    document.querySelector('body').style.overflow = 'auto';
-    setShowAnim(false);
-      
-    }, 3000);
-  }
+        }, 3000);
+    }
   }, [])
 
   const handleBegin = () => {
-    navigate("/quiz");
+    navigate(`/quiz/${id}`);
   };
 
   return (

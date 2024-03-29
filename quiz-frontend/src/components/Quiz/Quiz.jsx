@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { useState} from 'react'
 import Button from '@mui/material/Button';
 import { useNavigate } from 'react-router-dom';
-import { saveResponses } from '../../services/ResponseService';
+import { quizCompleted, saveResponses } from '../../services/ResponseService';
+import { useParams } from 'react-router-dom';
 
 import './Quiz.scss'
 
@@ -34,13 +35,15 @@ const Quiz = ({ questions }) => {
       setCurrentQuestion((prev) => prev + 1);
     } 
     else {
-      setCurrentQuestion(1);
-      saveResponses(id,reviewData).then((response) => {
-        console.log(response.data)
-        navigate('/review', { state: { results: reviewData } });
-      }).catch(error => {
-          console.error(error);
-      })
+      //setCurrentQuestion(1);
+      // saveResponses(id,reviewData).then((response) => {
+      //   console.log(response.data)
+      //   quizCompleted(id)
+      //   navigate(`/review/${id}`, { state: { results: reviewData } });
+      // }).catch(error => {
+      //     console.error(error);
+      // })
+      navigate(`/review/${id}`, { state: { results: reviewData } });
     }
   };
 

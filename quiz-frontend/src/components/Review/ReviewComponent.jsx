@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { quizQuestions } from '../../questions/Questions';
-import '../Quiz/Quiz.scss';
-
+import { getResponses } from '../../services/ResponseService';
+import Button from '@mui/material/Button';
+// import '../Quiz/Quiz.scss';
+import './Review.scss';
 const ReviewComponent = () => {
   const location = useLocation(); 
   const [answers, setAnswers] = useState(location.state.results);
@@ -11,14 +13,14 @@ const ReviewComponent = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    // if (id) 
-    // {
-    //   getAnswers(id).then((data) => {
-    //     setAnswers(data);
-    //   }).catch((error) => {
-    //     console.error('Error:', error);
-    //   });
-    // }
+    if (id) 
+    {
+      getResponses(id).then((data) => {
+        setAnswers(data);
+      }).catch((error) => {
+        console.error('Error:', error);
+      });
+    }
 
     const reviewed = answers.map((item,index) => {
       const questionIndex = index; // Adjust index to match array indexing
@@ -43,7 +45,7 @@ const ReviewComponent = () => {
   }, [answers]);
   
   const renderReviewItems = () => {
-    console.log(reviewedQuestions);
+    
     return reviewedQuestions.map((item, index) => (
       <div key={index} className="review-item">
         <p className="review-question">{`Question ${index + 1}: ${item.question}`}</p>
@@ -75,25 +77,31 @@ const ReviewComponent = () => {
 
   return (
     <div className='text-center'>
-      <div className="quiz-container">
-        <h1>Result</h1>
-        <p>
-          Total Questions: <span>{reviewedQuestions.length}</span>
-        </p>
-        <p>
-          Total Score: <span>{correctAnswerCount * 10}</span>
-        </p>
-        <p>
-          Correct Answers: <span>{correctAnswerCount}</span>
-        </p>
-        <p>
-          Wrong Answers: <span>{wrongAnswerCount}</span>
-        </p>
-        <div className="review-section">
+        <div className="review-header">
+          <h1>Result</h1>
+          <br />
+          <p>
+            Total Questions: <span>{reviewedQuestions.length}</span>
+          </p>
+          <p>
+            Total Score: <span>{correctAnswerCount * 10}</span>
+          </p>
+          <p>
+            Correct Answers: <span>{correctAnswerCount}</span>
+          </p>
+          <p>
+            Wrong Answers: <span>{wrongAnswerCount}</span>
+          </p>
+        </div>
+      <div className="review-container">
           <h2>Review Answers:</h2>
           {renderReviewItems()}
-        </div>
-        <button onClick={gameEnvironment}>Go to Game Environment</button>
+
+        <center>
+          <Button variant="contained" color="primary" onClick={gameEnvironment}>
+          Go to Game Environment
+          </Button> 
+        </center>
       </div>
     </div>
   );

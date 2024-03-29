@@ -15,4 +15,8 @@ export const isQuizCompleted = (userId) => {
     return axios.get(REST_API_USER_URL + '/id/'+ userId);
 }
 
+export const quizCompleted = (userId) => {
+    return axios.post(REST_API_USER_URL + '/questionnaire/'+ userId);
+}
+
 
