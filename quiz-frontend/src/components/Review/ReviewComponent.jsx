@@ -22,8 +22,6 @@ const ReviewComponent = () => {
       const response = await isQuizCompleted(id);
       setQuizCompleted(response.data.questionnaireTaken);
       setScore(response.data.questionnaireScore);
-      console.log("Quiz completed ? " + response.data.questionnaireTaken); // Log the updated value
-      console.log("Quiz Score ? " + response.data.questionnaireScore); // Log the updated value
     } catch (error) {
       alert('An error occurred while checking score. Please try again later.');
       console.error('Error checking quiz score:', error); // Log the error
@@ -57,7 +55,7 @@ const ReviewComponent = () => {
         choices,
         givenAnswer: choices[item-1],
         correctAnswer: correctAnswerStr,
-        answerStatus: item === correctAnswer,
+        answerStatus: item == correctAnswer,
         generalFeedback,
         specificFeedback,
       };
@@ -68,16 +66,16 @@ const ReviewComponent = () => {
     }
   }, [quizCompleted, answers]);
 
-
   const renderReviewItems = () => {
-    
     return reviewedQuestions.map((item, index) => (
       <div key={index} className="review-item">
         <p className="review-question">{`Question ${index + 1}: ${item.question}`}</p>
         {item.choices ? (
           <ul className="review-choices">
             {item.choices.map((choice, choiceIndex) => (
-              <li key={choiceIndex}>{choice}</li>
+              <li key={choiceIndex} className={getChoiceClass(item, choice)}>
+                {choice}
+              </li>
             ))}
           </ul>
         ) : (
@@ -91,6 +89,27 @@ const ReviewComponent = () => {
       </div>
     ));
   };
+
+  
+  
+  // Function to determine the class for each choice
+  const getChoiceClass = (item, choice) => {
+    if (item.answerStatus) {
+      // If answer is correct
+      if (choice === item.correctAnswer) {
+        return "correct-answer"; // Apply green background
+      }
+    } else {
+      // If answer is wrong
+      if (choice === item.correctAnswer) {
+        return "correct-answer"; // Apply green background
+      } else if (choice === item.givenAnswer) {
+        return "wrong-answer"; // Apply red background
+      }
+    }
+    return ""; // Default class
+  };
+  
   
 
   const gameEnvironment = () => {

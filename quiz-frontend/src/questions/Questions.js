@@ -10,7 +10,7 @@ export const quizQuestions = {
         "Hydropower",
       ],
       type: "MCQs",
-      correctAnswer: 3,
+      correctAnswer:3,
       generalFeedback: "While the mix of energy sources varies by region, fossil fuels remain the dominant source for electricity generation globally, though renewable sources are on the rise.",
       specificFeedback: [ 
         "Solar power is growing but is not the primary source globally.",
@@ -28,7 +28,7 @@ export const quizQuestions = {
         "Through the internet",
       ],
       type: "MCQs",
-      correctAnswer: 2,
+      correctAnswer:2,
       generalFeedback: "Electricity is generated at power plants and then transmitted over long distances via high-voltage transmission lines. It's then distributed to consumers through lower-voltage distribution networks.",
       specificFeedback: [
         "Water pipes are used for plumbing, not electrical transmission.",
@@ -47,7 +47,7 @@ export const quizQuestions = {
        "It has no impact on the environment",
       ],
       type: "MCQs",
-      correctAnswer: 3,
+      correctAnswer:3,
       generalFeedback: "Energy efficiency is crucial for reducing energy consumption, lowering energy bills, and minimizing the environmental footprint by decreasing greenhouse gas emissions.",
       specificFeedback: [
         "Energy efficiency aims to reduce, not increase, consumption.",
@@ -64,7 +64,7 @@ export const quizQuestions = {
         "To eliminate the use of renewable energy sources", 
         "To double the energy costs for consumers"],
       type: "MCQs",
-      correctAnswer: 2,
+      correctAnswer:2,
       generalFeedback: "Demand management aims to ensure energy is used more efficiently, balancing the supply with the fluctuating demand to maintain grid stability and reduce costs.",
       specificFeedback: [
         "This is the opposite of demand management's goal, which aims to optimize, not increase, energy use.",
@@ -82,7 +82,7 @@ export const quizQuestions = {
         "Discouraging the use of energy-efficient appliances",
       ],
       type: "MCQs",
-      correctAnswer: 3,
+      correctAnswer:3,
       generalFeedback: "Lowering rates or providing incentives for reduced energy use during peak hours helps smooth out energy demand, benefiting both the grid and consumer.",
       specificFeedback: [
         "This approach would not encourage lower usage during peak times.",
@@ -100,7 +100,7 @@ export const quizQuestions = {
         "Reduced internet connectivity",
       ],
       type: "MCQs",
-      correctAnswer: 3,
+      correctAnswer:3,
       generalFeedback: "Participating in demand management programs can lead to significant savings on electricity bills for consumers by incentivizing energy use during off-peak hours.",
       specificFeedback: [
         "Demand management aims to reduce, not increase, consumer energy bills.",
@@ -118,7 +118,7 @@ export const quizQuestions = {
         "By discouraging the use of renewable energy",
       ],
       type: "MCQs",
-      correctAnswer: 2,
+      correctAnswer:2,
       specificFeedback: [
         "Demand management aims to decrease, not increase, carbon emissions.",
         "Correct! Reducing reliance on fossil fuels and lowering carbon emissions are key environmental benefits of demand management.",
@@ -135,7 +135,7 @@ export const quizQuestions = {
         "Reduced internet connectivity",
       ],
       type: "MCQs",
-      correctAnswer: 3,
+      correctAnswer:3,
       generalFeedback: "Participation in demand management programs often results in direct benefits for consumers, such as savings on electricity bills, by encouraging energy use during less expensive, off-peak hours.",
       specificFeedback: [
         "The goal of demand management is to offer savings, not to increase bills.",
@@ -172,7 +172,7 @@ export const quizQuestions = {
         "Data centers that require constant cooling",
       ],
       type: "MCQs",
-      correctAnswer: 3,
+      correctAnswer:3,
       generalFeedback: "Demand management programs focus on adjusting the usage of flexible and non-critical electric loads to optimize energy consumption. Residential air conditioning units, for example, can be adjusted without compromising safety or critical operations, making them ideal for inclusion in these programs.",
       specificFeedback: [ 
         "While lighting can be managed, fixed systems in public areas often have safety implications that limit their flexibility.",
