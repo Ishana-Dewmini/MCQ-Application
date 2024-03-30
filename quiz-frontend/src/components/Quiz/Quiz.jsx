@@ -12,21 +12,29 @@ const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(1)
   const [answerIdx, setAnswerIdx] = useState(null)
   const [reviewData, setReviewData] = useState([])
-  const [score, setScore] = useState(0)
 
   const {id} = useParams();
   const navigate = useNavigate();
 
   const { question, choices, correctAnswer } = questions[currentQuestion-1]
 
-  useEffect(() => {
-    console.log("Review Data:(in useEffect) ", reviewData);
-    const newScore = reviewData.reduce((acc, answer) => {
-      return answer === correctAnswer ? acc + 10 : acc;
-    }, 0);
-    console.log("New Score: ", newScore);
-    setScore(prevScore => prevScore + newScore);
-}, [correctAnswer]);
+//   useEffect(() => {
+//     console.log("Review Data:(in useEffect) ", reviewData);
+//     const newScore = reviewData.reduce((acc, answer) => {
+//       return answer === correctAnswer ? acc + 10 : acc;
+//     }, 0);
+//     console.log("New Score: ", newScore);
+//     setScore(prevScore => prevScore + newScore);
+// }, [correctAnswer]);
+
+function calculateScore() {
+  const newScore = reviewData.reduce((acc, answer) => {
+    return answer === correctAnswer ? acc + 10 : acc;
+  }, 0);
+  console.log("New Score: ", newScore);
+  return newScore;
+}
+
 
 
   const onAnswerClick = (selectedIndex) => {
@@ -45,6 +53,7 @@ const Quiz = ({ questions }) => {
       setCurrentQuestion((prev) => prev + 1);
     } else {
       setCurrentQuestion(1);
+      const score = calculateScore();
       saveResponses(id, reviewData).then(() => {
         // Upon successful saving of responses
         quizCompleted(id).then(() => {
