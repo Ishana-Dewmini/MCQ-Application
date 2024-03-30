@@ -10,28 +10,42 @@ const WelcomeQuizComponent = () => {
   const navigate = useNavigate();
   const [showAnim, setShowAnim] = useState(true);
   const [quizCompleted, setQuizCompleted] = useState(false);
-  const [reviewData, setReviewData] = useState([])
+  const [profileCompleted, setProfileCompleted] = useState(true);
+  const [reviewData, setReviewData] = useState([]);
+  
 
   // const { id } = useParams();
-  const {id}  = 2;
+  const id  = 9;
+
+  async function quizCompletedStatus(id) {
+    try {
+      const response = await isQuizCompleted(id);
+      setQuizCompleted(response.data.questionnaireTaken);
+      setProfileCompleted(response.data.profileEdited);
+    } catch (error) {
+      alert('An error occurred while checking quiz completion. Please try again later.');
+      console.error('Error checking quiz completion:', error); // Log the error
+    }
+  }
 
   useEffect(() => {
 
-    isQuizCompleted(id).then((response) => {
-      setQuizCompleted(response.data.questionnaireTaken);
-      console.log("Quiz completed? " + quizCompleted);
-    });
+    quizCompletedStatus(id);
 
-
-    if (quizCompleted) {    
-          getResponses(id).then((data) => {
-          setReviewData(data);
-        }).catch((error) => {
+    if (quizCompleted && profileCompleted) {    
+          getResponses(id).then((response) => {
+          setReviewData(response.data);
+          navigate(`/review/${id}`, { state: { results: reviewData } });
+        }).catch((error) => { 
           console.error('Error:', error);
         });
-
-        navigate(`/review/${id}`, { state: { results: reviewData } });
       }
+
+    else if (!profileCompleted)
+    {
+      alert('Update Player Profile first!!');
+      navigate('/errorPage');
+    }
 
     else {
 
@@ -45,7 +59,9 @@ const WelcomeQuizComponent = () => {
       
         }, 3000);
     }
-  }, [])
+  }, [quizCompleted,profileCompleted])
+
+
 
   const handleBegin = () => {
     navigate(`/quiz/${id}`);
@@ -88,3 +104,49 @@ const WelcomeQuizComponent = () => {
 };
 
 export default WelcomeQuizComponent;
+
+
+
+
+
+
+
+
+
+
+
+
+  // async function getQuizCompleted(id) {
+  //   try {
+  //     const response = await isQuizCompleted(id);
+  //     console.log(response.data);
+  //     setQuizCompleted(response.data.questionnaireTaken);
+  //     console.log("Quiz completed? " + response.data.questionnaireTaken); // Log the updated value
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   const {id}  = 1;
+  //   getQuizCompleted(id); // Call the async function
+  
+  //   if (quizCompleted) {    
+  //     getResponses(id).then((data) => {
+  //       setReviewData(data);
+  //       console.log(data);
+  //       navigate(`/review/${id}`, { state: { results: reviewData } }); // Use the 'data' received in the callback
+  //     }).catch((error) => { 
+  //       console.error('Error:', error);
+  //     });
+  //   } else {
+  //     document.querySelector('body').style.overflow = 'hidden';
+  //     document.querySelector('body').scrollTo(0, 0);
+  
+  //     setTimeout(() => {
+  //       document.querySelector('body').style.overflow = 'auto';
+  //       setShowAnim(false);
+  //     }, 3000);
+  //   }
+  // }, [id, quizCompleted]); // Add 'id' and 'quizCompleted' to the dependency array
+  

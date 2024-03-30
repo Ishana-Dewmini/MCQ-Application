@@ -1,52 +1,59 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { isQuizCompleted } from '../../services/ResponseService';
+import React from 'react'
+// import { useNavigate } from 'react-router-dom'
 
 const ErrorComponent = () => {
-  const navigate = useNavigate(); // Importing useNavigate here
 
-  const [answers, setAnswers] = useState();
-  useEffect(() => {
-    isQuizCompleted(2).then((response) => {
-      setAnswers(response.data.questionnaireTaken);
-    });
-  }, []);
-
-  // function getAllAnswers() {
-  //   isQuizCompleted(2).then((response) => {
-  //     setAnswers(response.data.questionnaireTaken);
-  //   });
-  // }
+  // const navigate = useNavigate();
 
   return (
     <div>
-      <h1>You have already completed the quiz.</h1>
-      <textarea value={answers} readOnly></textarea>
-      <button onClick={() => navigate('/review')}>Go to Quiz Review Page</button> {/* Fixed typo in the button text */}
+        <h1>Update Player Profile first!!</h1>
+        
     </div>
-  );
-};
+  )
+  
+}
 
-export default ErrorComponent;
+export default ErrorComponent
 
 
-// import React from 'react'
-// import { useNavigate } from 'react-router-dom'
+// import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import { getResponses, isQuizCompleted } from '../../services/ResponseService';
 
 // const ErrorComponent = () => {
-
-//   const navigate = useNavigate();
+//   const navigate = useNavigate(); // Importing useNavigate here
+//   const [status, setStatus] = useState(); // Added a new state variable to store the status of the quiz [completed or not
+//   const [answers, setAnswers] = useState();
 
   
 
+//   useEffect(() => {
+//     const id = 1;
+//     isQuizCompleted(id).then((response) => {
+//       setStatus(response.data.questionnaireTaken);
+//     });
+//     getResponses(id).then((response) => {
+//       setAnswers(response.data);
+//     }).catch((error) => {
+//       console.error('Error:', error);
+//     } );
+//   }, []);
+
+//   // function getAllAnswers() {
+//   //   isQuizCompleted(2).then((response) => {
+//   //     setAnswers(response.data.questionnaireTaken);
+//   //   });
+//   // }
 
 //   return (
 //     <div>
-//         <h1>You have already completed the quiz.</h1>
-//         {/* <button onClick={() => navigate('/review')}>Goto Quiz Review Page</button> */}
+//       <h1>You have already completed the quiz.</h1>
+//       <textarea value={status} readOnly></textarea>
+//       <textarea value={answers} readOnly></textarea>
+//       <button onClick={() => navigate('/review')}>Go to Quiz Review Page</button> {/* Fixed typo in the button text */}
 //     </div>
-//   )
-  
-// }
+//   );
+// };
 
-// export default ErrorComponent
+// export default ErrorComponent;
