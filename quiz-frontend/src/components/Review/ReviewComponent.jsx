@@ -1,27 +1,47 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { quizQuestions } from '../../questions/Questions';
-import { getResponses } from '../../services/ResponseService';
+import { getResponses,isQuizCompleted } from '../../services/ResponseService';
 import Button from '@mui/material/Button';
 // import '../Quiz/Quiz.scss';
 import './Review.scss';
+
 const ReviewComponent = () => {
   const location = useLocation(); 
   const [answers, setAnswers] = useState(location.state.results);
   const [reviewedQuestions, setReviewedQuestions] = useState([]);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [correctAnswerCount, setCorrectAnswerCount] = useState();
+  const [score, setScore] = useState(0);
 
+  const navigate = useNavigate();
   const { id } = useParams();
 
+  async function quizCompletedScoreStatus(id) {
+    try {
+      const response = await isQuizCompleted(id);
+      setQuizCompleted(response.data.questionnaireTaken);
+      setScore(response.data.questionnaireScore);
+    } catch (error) {
+      alert('An error occurred while checking score. Please try again later.');
+      console.error('Error checking quiz score:', error); // Log the error
+    }
+  }
+
   useEffect(() => {
-    if (id) 
+    quizCompletedScoreStatus(id);
+  }, [id]);
+
+  useEffect(() => {
+
+    if (quizCompleted) 
     {
-      getResponses(id).then((data) => {
-        setAnswers(data);
+      getResponses(id).then((response) => {
+        setAnswers(response.data);
       }).catch((error) => {
         console.error('Error:', error);
       });
-    }
-
+    
     const reviewed = answers.map((item,index) => {
       const questionIndex = index; // Adjust index to match array indexing
       const question = quizQuestions.questions[questionIndex].question;
@@ -35,24 +55,27 @@ const ReviewComponent = () => {
         choices,
         givenAnswer: choices[item-1],
         correctAnswer: correctAnswerStr,
-        answerStatus: item === correctAnswer,
+        answerStatus: item == correctAnswer,
         generalFeedback,
         specificFeedback,
       };
     });
 
     setReviewedQuestions(reviewed);
-  }, [answers]);
-  
+    setCorrectAnswerCount(reviewed.filter((item) => item.answerStatus).length);
+    }
+  }, [quizCompleted, answers]);
+
   const renderReviewItems = () => {
-    
     return reviewedQuestions.map((item, index) => (
       <div key={index} className="review-item">
         <p className="review-question">{`Question ${index + 1}: ${item.question}`}</p>
         {item.choices ? (
           <ul className="review-choices">
             {item.choices.map((choice, choiceIndex) => (
-              <li key={choiceIndex}>{choice}</li>
+              <li key={choiceIndex} className={getChoiceClass(item, choice)}>
+                {choice}
+              </li>
             ))}
           </ul>
         ) : (
@@ -66,15 +89,36 @@ const ReviewComponent = () => {
       </div>
     ));
   };
+
+  
+  
+  // Function to determine the class for each choice
+  const getChoiceClass = (item, choice) => {
+    if (item.answerStatus) {
+      // If answer is correct
+      if (choice === item.correctAnswer) {
+        return "correct-answer"; // Apply green background
+      }
+    } else {
+      // If answer is wrong
+      if (choice === item.correctAnswer) {
+        return "correct-answer"; // Apply green background
+      } else if (choice === item.givenAnswer) {
+        return "wrong-answer"; // Apply red background
+      }
+    }
+    return ""; // Default class
+  };
+  
   
 
   const gameEnvironment = () => {
     
   }
 
-  let correctAnswerCount = reviewedQuestions.filter(e => e.answerStatus == true).length;
-  let wrongAnswerCount = reviewedQuestions.filter(e => e.answerStatus == false).length;
 
+  let wrongAnswerCount = reviewedQuestions.length - correctAnswerCount;
+  
   return (
     <div className='text-center'>
         <div className="review-header">
@@ -84,14 +128,15 @@ const ReviewComponent = () => {
             Total Questions: <span>{reviewedQuestions.length}</span>
           </p>
           <p>
-            Total Score: <span>{correctAnswerCount * 10}</span>
+            Total Score: <span>{isNaN(score) ? 0 : score}</span>
           </p>
           <p>
-            Correct Answers: <span>{correctAnswerCount}</span>
+            Correct Answers: <span>{isNaN(correctAnswerCount) ? 0 : correctAnswerCount}</span>
           </p>
           <p>
-            Wrong Answers: <span>{wrongAnswerCount}</span>
+            Wrong Answers: <span>{isNaN(wrongAnswerCount) ? 0 : wrongAnswerCount}</span>
           </p>
+
         </div>
       <div className="review-container">
           <h2>Review Answers:</h2>

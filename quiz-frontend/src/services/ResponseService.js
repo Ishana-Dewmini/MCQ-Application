@@ -20,3 +20,8 @@ export const quizCompleted = (userId) => {
 }
 
 
+export const setQuizScore = (userId, score) => {
+    return axios.post(REST_API_USER_URL + '/score/'+ userId+'/'+score);
+}
+
+
