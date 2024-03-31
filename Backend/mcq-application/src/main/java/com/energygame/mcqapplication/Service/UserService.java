@@ -5,6 +5,8 @@ import com.energygame.mcqapplication.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.energygame.mcqapplication.Config.JwtTokenProvider;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -13,6 +15,9 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
+
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -20,14 +25,23 @@ public class UserService {
 
     }
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public String saveUser(String userName) {
+        User existingUser = userRepository.findByUserName(userName);
+        if (existingUser != null) {
+            return jwtTokenProvider.generateToken(userName);
+        } else {
+            User user = new User();
+            user.setUserName(userName);
+            user.setProfileEdited(false);
+            user.setQuestionnaireTaken(false);
+            user.setQuestionnaireScore(0);
+            userRepository.save(user);
+            return jwtTokenProvider.generateToken(userName);
+        }
     }
 
-    public User getUserByKey(String apiKey) {
-        Optional<User> optionalUser = userRepository.findByApiKey(apiKey);
-        return optionalUser.orElse(null);
-    }
+
+
 
     public User getUserById(long user_id) {
         Optional<User> optionalUser = userRepository.findById(user_id);

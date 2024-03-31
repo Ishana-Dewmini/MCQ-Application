@@ -14,8 +14,8 @@ public class User {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "API_key")
-    private String apiKey;
+    @Column(name = "user_name ")
+    private String userName;
 
     @Column(name = "profile_edited")
     private boolean profileEdited;
