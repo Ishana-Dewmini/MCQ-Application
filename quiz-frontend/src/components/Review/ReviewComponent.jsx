@@ -83,7 +83,7 @@ const ReviewComponent = () => {
         )}
         <p className="review-given-answer">{`Given Answer: ${item.givenAnswer}`}</p>
         <p className="review-correct-answer">{`Correct Answer: ${item.correctAnswer}`}</p>
-        <p className="review-correctness">{`Your answer is ${item.answerStatus ? 'correct' : 'wrong'}`}</p>
+        <p className="review-correctness">{`Your answer is ${item.answerStatus ? 'Correct !' : 'Wrong !'}`}</p>
         <p className="review-general-feedback">{`General Feedback: ${item.generalFeedback}`}</p>
         <p className="review-specific-feedback">{`Specific Feedback: ${item.specificFeedback}`}</p>
       </div>
@@ -106,8 +106,9 @@ const ReviewComponent = () => {
       } else if (choice === item.givenAnswer) {
         return "wrong-answer"; // Apply red background
       }
+      
     }
-    return ""; // Default class
+    return "other-answer"; // Default class
   };
   
   
@@ -141,9 +142,9 @@ const ReviewComponent = () => {
       <div className="review-container">
           <h2>Review Answers:</h2>
           {renderReviewItems()}
-
+        
         <center>
-          <Button variant="contained" color="primary" onClick={gameEnvironment}>
+          <Button variant="contained" color="success" onClick={gameEnvironment}>
           Go to Game Environment
           </Button> 
         </center>
