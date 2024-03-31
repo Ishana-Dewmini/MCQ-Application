@@ -32,7 +32,7 @@ public class JwtTokenProvider {
             JSONObject jsonObject = new JSONObject(payload);
             String userName = jsonObject.getString("sub");
 
-            String generatedToken = generateToken(userName);
+            String generatedToken = "Bearer "+generateToken(userName);
 
             // Compare tokens using equals method, not ==
             if (token.equals(generatedToken)) {
