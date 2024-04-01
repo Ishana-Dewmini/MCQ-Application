@@ -22,7 +22,7 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public boolean validateToken(String token) {
+    public String decodeToken(String token) {
         try {
             String[] chunks = token.split("\\.");
             Base64.Decoder decoder = Base64.getUrlDecoder();
@@ -31,8 +31,22 @@ public class JwtTokenProvider {
             // Assuming the payload is in JSON format, parse it
             JSONObject jsonObject = new JSONObject(payload);
             String userName = jsonObject.getString("sub");
+            return userName;
+        } catch (Exception e) {
+            return "Error";
+        }
+    }
 
-            String generatedToken = "Bearer "+generateToken(userName);
+
+    public boolean validateToken(String token) {
+        try {
+
+            String userName = decodeToken(token);
+            if (userName=="Error"){
+                return false;
+            }
+
+            String generatedToken = generateToken(userName);
 
             // Compare tokens using equals method, not ==
             if (token.equals(generatedToken)) {

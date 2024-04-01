@@ -1,10 +1,13 @@
 package com.energygame.mcqapplication.Controller;
+import io.swagger.v3.core.util.Json;
 import org.springframework.security.access.AccessDeniedException;
 import com.energygame.mcqapplication.Config.JwtTokenProvider;
 import com.energygame.mcqapplication.Model.User;
 import com.energygame.mcqapplication.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @CrossOrigin("*")
 @RestController
@@ -21,7 +24,7 @@ public class UserController {
 
 
     @PostMapping
-    public String saveUser(@RequestBody String userName) {
+    public Map<String, Object> saveUser(@RequestBody String userName) {
         return userService.saveUser(userName);
     }
 

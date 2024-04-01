@@ -2,12 +2,14 @@ package com.energygame.mcqapplication.Service;
 
 import com.energygame.mcqapplication.Model.User;
 import com.energygame.mcqapplication.Repository.UserRepository;
+import io.swagger.v3.core.util.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.energygame.mcqapplication.Config.JwtTokenProvider;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -25,10 +27,14 @@ public class UserService {
 
     }
 
-    public String saveUser(String userName) {
+    public Map<String, Object> saveUser(String token) {
+        String userName = jwtTokenProvider.decodeToken(token);
         User existingUser = userRepository.findByUserName(userName);
+        Map<String, Object> response = new HashMap<>();
         if (existingUser != null) {
-            return jwtTokenProvider.generateToken(userName);
+            int userID = existingUser.getUserId();
+            response.put("userID", userID);
+            response.put("token", jwtTokenProvider.generateToken(userName));
         } else {
             User user = new User();
             user.setUserName(userName);
@@ -36,8 +42,11 @@ public class UserService {
             user.setQuestionnaireTaken(false);
             user.setQuestionnaireScore(0);
             userRepository.save(user);
-            return jwtTokenProvider.generateToken(userName);
+            int userID = userRepository.findByUserName(userName).getUserId();
+            response.put("userID", userID);
+            response.put("token", jwtTokenProvider.generateToken(userName));
         }
+        return response;
     }
 
 
