@@ -63,37 +63,6 @@ const Quiz = ({ questions }) => {
     }
   };
   
-
-
-
-  // return (
-    
-  //     <div className='quiz-container'>
-  //       <span className='active-question-no'>{currentQuestion }</span>
-  //       <span className='total-question'>/{ questions.length }</span>
-  //       <h2>{ question }</h2>
-  //       <ul>
-  //       { 
-  //         choices.map((choice, index) => (
-  //               <li
-  //                 onClick={() => onAnswerClick(index)}
-  //                 key={choice}
-  //                 className={answerIdx === index ? "selected-answer" : null}
-  //               >
-  //                 {choice}
-  //               </li>
-  //             ))}
-  //       </ul>
-
-  //       <center>
-  //         <Button variant="contained" color="primary" onClick={onClickNext} disabled = {answerIdx === null}>
-  //             {currentQuestion == questions.length ? "Finish" : "Next"}
-  //         </Button> 
-  //       </center>
-
-  //     </div>  
-      
-  // )
   return (
     <div className='quiz-container'>
       <span className='active-question-no'>{currentQuestion}</span>

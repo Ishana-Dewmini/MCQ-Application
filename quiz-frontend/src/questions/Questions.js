@@ -119,6 +119,7 @@ export const quizQuestions = {
       ],
       type: "MCQs",
       correctAnswer:2,
+      generalFeedback:"Implementing demand management strategies plays a crucial role in environmental conservation by reducing the reliance on non-renewable energy sources and minimizing carbon emissions.",
       specificFeedback: [
         "Demand management aims to decrease, not increase, carbon emissions.",
         "Correct! Reducing reliance on fossil fuels and lowering carbon emissions are key environmental benefits of demand management.",

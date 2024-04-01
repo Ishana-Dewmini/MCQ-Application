@@ -15,7 +15,7 @@ const WelcomeQuizComponent = () => {
   
 
   // const { id } = useParams();
-  const id  = 14;
+  const id  = 19;
 
   async function quizCompletedStatus(id) {
     try {
@@ -93,11 +93,14 @@ const WelcomeQuizComponent = () => {
         <br />
         Are you ready to put your energy knowledge to the test and earn some coins? Let's get started! Good luck! 🌟
       </p>
-
-      <Button variant="contained" color="success" onClick={handleBegin}>
+    <center>
+      <Button variant="contained" color="success" onClick={handleBegin} style={{ marginBottom: '50px' }}>
         Begin Test
       </Button>
+    </center>
+      
     </div>
+
 
     </>
   );
