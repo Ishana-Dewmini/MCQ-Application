@@ -1,0 +1,30 @@
+.animContainer{
+    position: fixed;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(0deg, #7460da 0.05%, #4d2c0e);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    z-index: 100;
+
+    & h2{
+        animation: test;
+        animation-duration: 0.5s;
+        animation-fill-mode: forwards;
+        animation-iteration-count: 1;
+        animation-timing-function:ease-out;
+    }
+}
+
+
+@keyframes test {
+    from {
+        font-size: 1vw;
+        
+    }to{
+        font-size: 5vw;
+    }
+}

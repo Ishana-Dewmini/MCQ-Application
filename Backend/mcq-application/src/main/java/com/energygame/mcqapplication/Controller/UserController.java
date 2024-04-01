@@ -6,7 +6,7 @@ import com.energygame.mcqapplication.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/energy-quest/user")
 public class UserController {

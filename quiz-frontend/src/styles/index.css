@@ -1,0 +1,10 @@
+body {
+  font-family: monospace;
+  background: linear-gradient(90deg, #150080 0.03%, #d08642);
+  color: #2d264b;
+  display: flex;
+  margin: 0 auto;
+  padding: 0 30px;
+  justify-content: center;
+  height: 100vh;
+}/*# sourceMappingURL=index.css.map */

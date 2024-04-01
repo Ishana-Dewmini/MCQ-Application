@@ -1,93 +1,91 @@
 @import '../../styles/vars.scss';
 
 .quiz-container {
-    width: 500px;
-    background: $bg;
-    border-radius: 4px;
-    margin-top: 80px;
-    padding: 30px 60px;
-    box-sizing: border-box;
-  
-    .active-question-no {
-      font-size: 32px;
-      font-weight: 500;
-      color: $primary;
-    }
-  
-    .total-question {
+  margin-top: 80px;
+  width: 500px;
+  background: linear-gradient(135deg, #f6f6f6, #e9e9e9);
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px 50px;
+  text-align: center;
+
+  .active-question-no {
+    font-size: 32px;
+    font-weight: 500;
+    color: #333;
+  }
+
+  .total-question {
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+  }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 20px 0;
+    color: #333;
+  }
+
+  ul {
+    margin-top: 20px;
+    padding-left: 0;
+    display: flex;
+    flex-direction: column;
+
+    li {
+      text-decoration: none;
+      list-style:outside decimal;
+      color: #fc0707;
       font-size: 16px;
-      font-weight: 500;
-      color: $disabled;
-    }
-  
-    h2 {
-      font-size: 16px;
-      font-weight: 500;
-      margin: 0;
-    }
-  
-    ul {
-      margin-top: 20px;
-      margin-left: -40px;
-  
-      li {
-        text-decoration: none;
-        list-style: none;
-        color: $foreground;
-        font-size: 14px;
-        background: $bg;
-        border: 1px solid $disabled;
-        border-radius: 16px;
-        padding: 11px;
-        margin-top: 15px;
-        cursor: pointer;
-      }
-  
-      .selected-answer {
-        background: $primary;
-        border: 1px solid $accent;
-        color: $bg;
-      }
-    }
-  
-    button {
-      background: linear-gradient(0deg, $primary 0.05%, $accent);
-      border-radius: 20px;
-      font-size: 14px;
-      color: $bg;
-      padding: 8px 30px;
-      outline: none;
-      border:#150080;
-      margin-top: 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px 20px;
+      margin-top: 15px;
       cursor: pointer;
-  
-      &:disabled {
-        background: $bg-accent;
-        color: $disabled;
-        cursor: not-allowed;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #c2fc05;
       }
     }
-  
-  
-    .result {
-      text-align: center;
-  
-      h3 {
-        font-size: 24px;
-        letter-spacing: 1.4px;
-        text-align: center;
-      }
-  
-      p {
-        font-size: 16px;
-        font-weight: 500;
-  
-        span {
-          color: $primary;
-          font-size: 22px;
-        }
-      }
+
+    .selected-answer {
+      background: #90ee90;
+      border-color: #0056b3;
+      color: #040404;
     }
   }
+
+  button {
+    background: #007bff;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    padding: 12px 30px;
+    outline: none;
+    border: none;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:disabled {
+      background: #ccc;
+      color: #666;
+      cursor: not-allowed;
+    }
+
+    &:enabled {
+      background: linear-gradient(0deg, $primary 0.05%, $accent);
+    }
+  }
+}
+
+
+
+
   
   

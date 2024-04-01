@@ -1,0 +1,28 @@
+@import '../../styles/vars.scss';
+
+$bg1: #b5c83a;
+$bg2: #8da7c2;
+
+
+.container1 {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    width: 500px;
+    background: $bg1;
+    border-radius: 20px;
+    margin-top: 80px;
+    padding: 20px 60px;
+    box-sizing:content-box;
+    align-items:center;
+}
+
+.container2 {
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    width: 500px;
+    background: $bg2;
+    border-radius: 20px;
+    margin-top: 80px;
+    padding: 20px 60px;
+    box-sizing:content-box;
+    align-items:center;
+}
+
