@@ -2,16 +2,23 @@ package com.energygame.mcqapplication.Service;
 
 import com.energygame.mcqapplication.Model.User;
 import com.energygame.mcqapplication.Repository.UserRepository;
+import io.swagger.v3.core.util.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.energygame.mcqapplication.Config.JwtTokenProvider;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
+
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
 
     @Autowired
@@ -20,14 +27,30 @@ public class UserService {
 
     }
 
-    public User saveUser(User user) {
-        return userRepository.save(user);
+    public Map<String, Object> saveUser(String token) {
+        String userName = jwtTokenProvider.decodeToken(token);
+        User existingUser = userRepository.findByUserName(userName);
+        Map<String, Object> response = new HashMap<>();
+        if (existingUser != null) {
+            int userID = existingUser.getUserId();
+            response.put("userID", userID);
+            response.put("token", jwtTokenProvider.generateToken(userName));
+        } else {
+            User user = new User();
+            user.setUserName(userName);
+            user.setProfileEdited(false);
+            user.setQuestionnaireTaken(false);
+            user.setQuestionnaireScore(0);
+            userRepository.save(user);
+            int userID = userRepository.findByUserName(userName).getUserId();
+            response.put("userID", userID);
+            response.put("token", jwtTokenProvider.generateToken(userName));
+        }
+        return response;
     }
 
-    public User getUserByKey(String apiKey) {
-        Optional<User> optionalUser = userRepository.findByApiKey(apiKey);
-        return optionalUser.orElse(null);
-    }
+
+
 
     public User getUserById(long user_id) {
         Optional<User> optionalUser = userRepository.findById(user_id);
