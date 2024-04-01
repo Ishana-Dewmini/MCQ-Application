@@ -46,7 +46,7 @@ public class JwtTokenProvider {
                 return false;
             }
 
-            String generatedToken = generateToken(userName);
+            String generatedToken = "Bearer "+generateToken(userName);
 
             // Compare tokens using equals method, not ==
             if (token.equals(generatedToken)) {
