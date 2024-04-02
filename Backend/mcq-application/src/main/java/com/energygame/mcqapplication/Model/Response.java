@@ -1,5 +1,4 @@
 package com.energygame.mcqapplication.Model;
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +15,5 @@ public class Response {
 
     @Column(name = "response", columnDefinition = "TEXT")
     private String response;
-
 
 }
