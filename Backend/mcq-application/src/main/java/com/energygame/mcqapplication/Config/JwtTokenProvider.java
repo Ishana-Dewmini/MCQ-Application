@@ -1,9 +1,10 @@
 package com.energygame.mcqapplication.Config;
 
+import com.energygame.mcqapplication.Model.User;
 import io.jsonwebtoken.*;
 import org.json.JSONObject;
 import org.springframework.stereotype.Component;
-
+import com.energygame.mcqapplication.Service.UserService;
 import java.security.SignatureException;
 import java.util.Base64;
 
@@ -12,6 +13,9 @@ public class JwtTokenProvider {
 
     // Define your secret key
     private static final String SECRET_KEY = "sgdsgfdhfghghhfhkawgkdsmjdbsnmcbwhjgyjweyuwqgdhawghdkgwhfdgwhkgdywafywgfhasgkassgdkjadgawhkafjfhagfkawfgk";
+
+
+
 
     // Method to generate JWT token
     public String generateToken(String userName) {
@@ -38,28 +42,21 @@ public class JwtTokenProvider {
     }
 
 
-    public boolean validateToken(String token) {
+    public Integer validateToken(String token, String userName) {
         try {
-
-            String userName = decodeToken(token);
-            if (userName=="Error"){
-                return false;
-            }
 
             String generatedToken = "Bearer "+generateToken(userName);
 
             // Compare tokens using equals method, not ==
             if (token.equals(generatedToken)) {
-                return true;
+                return 200;
             } else {
                 System.out.println(token);
                 System.out.println(generatedToken);
-                return false;
+                return 401;
             }
         } catch (Exception e) {
-            System.out.println("token: "+token);
-            System.out.println(e);
-            return false; // Token is invalid
+            return 401;
         }
     }
 

@@ -1,6 +1,6 @@
 package com.energygame.mcqapplication.Controller;
-import io.swagger.v3.core.util.Json;
-import org.springframework.security.access.AccessDeniedException;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import com.energygame.mcqapplication.Config.JwtTokenProvider;
 import com.energygame.mcqapplication.Model.User;
 import com.energygame.mcqapplication.Service.UserService;
@@ -31,49 +31,65 @@ public class UserController {
 
 
     @GetMapping("/id/{user_id}")
-    public User getUserById(@PathVariable long user_id, @RequestHeader("Authorization") String token) {
-
-        if (!jwtTokenProvider.validateToken(token)) {
-
-            throw new AccessDeniedException("Invalid token..!");
+    public ResponseEntity<?> getUserById(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        Integer validationId = jwtTokenProvider.validateToken(token,userName);
+        if (validationId.equals(401)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        } else if (validationId.equals(500)) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
-        return userService.getUserById(user_id);
+        User user = userService.getUserById(user_id);
+        return ResponseEntity.ok(user);
     }
 
     @GetMapping("/score/{user_id}")
-    public Integer getQuestionnaireScore(@PathVariable long user_id, @RequestHeader("Authorization") String token) {
-        if (!jwtTokenProvider.validateToken(token)) {
-
-            throw new AccessDeniedException("Invalid token..!");
+    public ResponseEntity<?> getQuestionnaireScore(@PathVariable long user_id, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        Integer validationId = jwtTokenProvider.validateToken(token,userName);
+        if (validationId.equals(401)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        } else if (validationId.equals(500)) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
-        return userService.getQuestionnaireScore(user_id);
+        Integer score = userService.getQuestionnaireScore(user_id);
+        return ResponseEntity.ok(score);
     }
 
     @PostMapping("profile/{user_id}")
-    public User updateProfileStatus(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
-        if (!jwtTokenProvider.validateToken(token)) {
-            // Handle invalid token (e.g., return unauthorized response)
-            throw new AccessDeniedException("Invalid token..!");
+    public ResponseEntity<?> updateProfileStatus(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        Integer validationId = jwtTokenProvider.validateToken(token,userName);
+        if (validationId.equals(401)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        } else if (validationId.equals(500)) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
-        return userService.updateProfileStatus(user_id);
+        return ResponseEntity.ok(userService.updateProfileStatus(user_id));
     }
 
     @PostMapping("questionnaire/{user_id}")
-    public User updateQuestionnaireStatus(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
-        if (!jwtTokenProvider.validateToken(token)) {
-
-            throw new AccessDeniedException("Invalid token..!");
+    public ResponseEntity<?> updateQuestionnaireStatus(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        Integer validationId = jwtTokenProvider.validateToken(token,userName);
+        if (validationId.equals(401)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        } else if (validationId.equals(500)) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
-        return userService.updateQuestionnaireStatus(user_id);
+        return ResponseEntity.ok(userService.updateQuestionnaireStatus(user_id));
     }
 
     @PostMapping("score/{user_id}/{score}")
-    public User updateQuestionnaireScore(@PathVariable int user_id, @PathVariable int score, @RequestHeader("Authorization") String token) {
-        if (!jwtTokenProvider.validateToken(token)) {
-
-            throw new AccessDeniedException("Invalid token..!");
+    public ResponseEntity<?> updateQuestionnaireScore(@PathVariable int user_id, @PathVariable int score, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        Integer validationId = jwtTokenProvider.validateToken(token,userName);
+        if (validationId.equals(401)) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
+        } else if (validationId.equals(500)) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
         }
-        return userService.updateQuestionnaireScore(user_id, score);
+        return ResponseEntity.ok(userService.updateQuestionnaireScore(user_id, score));
     }
 }
 
