@@ -1,14 +1,10 @@
 package com.energygame.mcqapplication.Service;
-
 import com.energygame.mcqapplication.Model.User;
 import com.energygame.mcqapplication.Repository.UserRepository;
-import io.swagger.v3.core.util.Json;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.energygame.mcqapplication.Config.JwtTokenProvider;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -27,6 +23,7 @@ public class UserService {
 
     }
 
+    // Method to save a user
     public Map<String, Object> saveUser(String token) {
         String userName = jwtTokenProvider.decodeToken(token);
         User existingUser = userRepository.findByUserName(userName);
@@ -52,12 +49,13 @@ public class UserService {
 
 
 
+    // Method to find a user by userId
     public User getUserById(long user_id) {
         Optional<User> optionalUser = userRepository.findById(user_id);
         return optionalUser.orElse(null);
     }
 
-
+    // Method to update profile updating status of a user
     public User updateProfileStatus(long user_id) {
         // Fetch the user from the repository
         User user = userRepository.findById(user_id).orElse(null);
@@ -78,6 +76,7 @@ public class UserService {
         }
     }
 
+    // Method to update questionnaire status of a user
     public User updateQuestionnaireStatus(long user_id) {
         // Fetch the user from the repository
         User user = userRepository.findById(user_id).orElse(null);
@@ -98,6 +97,7 @@ public class UserService {
         }
     }
 
+    // Method to update questionnaire score of a user
     public User updateQuestionnaireScore(long user_id, int score) {
         // Fetch the user from the repository
         User user = userRepository.findById(user_id).orElse(null);
@@ -118,6 +118,7 @@ public class UserService {
         }
     }
 
+    // Method to get questionnaire score of a user
     public Integer getQuestionnaireScore(Long userId) {
         // Retrieve the user by userId
         User user = userRepository.findById(userId).orElse(null);
@@ -130,6 +131,7 @@ public class UserService {
         // Return null if the user or questionnaire_score is not found
         return null;
     }
+
 
 
 
