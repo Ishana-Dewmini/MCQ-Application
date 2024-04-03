@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
 import WelcomeAnim from '../WelcomeAnimation/Anim';
-import { isQuizCompleted, getResponses } from '../../services/ResponseService';
+import { isQuizCompleted, getResponses, tokenAssign } from '../../services/ResponseService';
 import './Welcome.scss';
 
 
@@ -14,8 +14,8 @@ const WelcomeQuizComponent = () => {
   const [reviewData, setReviewData] = useState([]);
   
 
-  // const { id } = useParams();
-  const id  = 3;
+  const { token, id } = useParams();
+ 
 
   async function quizCompletedStatus(id) {
     try {
@@ -29,7 +29,7 @@ const WelcomeQuizComponent = () => {
   }
 
   useEffect(() => {
-
+    tokenAssign(token);
     quizCompletedStatus(id);
 
     if (quizCompleted && profileCompleted) {    

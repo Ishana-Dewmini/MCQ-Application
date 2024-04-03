@@ -3,6 +3,7 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { quizQuestions } from '../../questions/Questions';
 import { getResponses,isQuizCompleted } from '../../services/ResponseService';
 import Button from '@mui/material/Button';
+import LoadingAnim from '../Loading/Loading';
 // import '../Quiz/Quiz.scss';
 import './Review.scss';
 
@@ -13,6 +14,7 @@ const ReviewComponent = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [correctAnswerCount, setCorrectAnswerCount] = useState();
   const [score, setScore] = useState(0);
+  const [showAnim, setShowAnim] = useState(true);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -29,6 +31,17 @@ const ReviewComponent = () => {
   }
 
   useEffect(() => {
+
+    document.querySelector('body').style.overflow = 'hidden';
+    document.querySelector('body').scrollTo(0, 0);
+
+    setTimeout(() => {
+      
+    document.querySelector('body').style.overflow = 'auto';
+    setShowAnim(false);
+  
+    }, 2000);
+
     quizCompletedScoreStatus(id);
   }, [id]);
 
@@ -122,6 +135,8 @@ const ReviewComponent = () => {
   
   return (
     <div className='text-center'>
+      <LoadingAnim showAnim={showAnim} />
+      
         <div className="review-header">
           <h1>Result</h1>
           <br />

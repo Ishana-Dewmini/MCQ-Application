@@ -2,7 +2,13 @@ import axios from "axios";
 
 const REST_API_RESPONSE_URL = "http://localhost:8080/energy-quest";
 const REST_API_USER_URL = "http://localhost:8080/energy-quest/user";
-const token = "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJSYWphbmEgS2F2aW5kYSJ9.aVTGnmIStMAqZ9tvqZ-zCsCWVebzqkCT_czs9lugQUmB3lzcZXqD59KRvOwA562Fp7YciGYtg794fHACzcpvQg";
+let token = "";
+
+export const tokenAssign = (userToken) => {
+    token = userToken;
+}
+
+console.log(token);
 
 // Function to set the Authorization header with the JWT token
 const setAuthToken = () => {
@@ -35,6 +41,5 @@ export const setQuizScore = (userId, score) => {
     setAuthToken(token);
     return axios.post(REST_API_USER_URL + '/score/'+ userId+'/'+score);
 }
-
 
 
