@@ -138,26 +138,26 @@ public class UserService {
 
 
     public Integer getQuestionnaireScore(int userId) {
-        User user = userRepository.findById((long) userId).orElse(null);;
+        User user = userRepository.findById((long) userId).orElse(null);
         assert user != null;
         return user.getQuestionnaireScore();
     }
 
     public Integer getGameCoin(int userId) {
-        User user = userRepository.findById((long) userId).orElse(null);;
+        User user = userRepository.findById((long) userId).orElse(null);
         assert user != null;
         return user.getGameCoin();
     }
 
 
     public Integer getGameLevel(int userId) {
-        User user = userRepository.findById((long) userId).orElse(null);;
+        User user = userRepository.findById((long) userId).orElse(null);
         assert user != null;
         return user.getGameLevel();
     }
 
     public Integer getEnergyCoin(int userId) {
-        User user = userRepository.findById((long) userId).orElse(null);;
+        User user = userRepository.findById((long) userId).orElse(null);
         assert user != null;
         return user.getEnergyCoin();
     }
