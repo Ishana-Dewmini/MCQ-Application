@@ -38,6 +38,9 @@ public class UserService {
             user.setProfileEdited(false);
             user.setQuestionnaireTaken(false);
             user.setQuestionnaireScore(0);
+            user.setGameLevel(1);
+            user.setEnergyCoin(0);
+            user.setGameCoin(0);
             userRepository.save(user);
             int userID = userRepository.findByUserName(userName).getUserId();
             response.put("userID", userID);
@@ -78,68 +81,84 @@ public class UserService {
 
     // Method to update questionnaire status of a user
     public User updateQuestionnaireStatus(long user_id) {
-        // Fetch the user from the repository
         User user = userRepository.findById(user_id).orElse(null);
-
-        // Check if the user exists
         if (user != null) {
-            // Update the profile_edited field
             user.setQuestionnaireTaken(true);
-
-            // Save the updated user
             userRepository.save(user);
-
-            // Return the updated user
             return user;
         } else {
-            // Handle the case where the user is not found (return null or throw an exception)
             return null;
         }
     }
 
     // Method to update questionnaire score of a user
-    public User updateQuestionnaireScore(long user_id, int score) {
-        // Fetch the user from the repository
+    public User updateEnergyCoin(long user_id, int energyCoin) {
         User user = userRepository.findById(user_id).orElse(null);
-
-        // Check if the user exists
         if (user != null) {
-            // Update the profile_edited field
-            user.setQuestionnaireScore(score);
-
-            // Save the updated user
+            user.setEnergyCoin(energyCoin);
             userRepository.save(user);
-
-            // Return the updated user
             return user;
         } else {
-            // Handle the case where the user is not found (return null or throw an exception)
             return null;
         }
     }
 
-    // Method to get questionnaire score of a user
-    public Integer getQuestionnaireScore(Long userId) {
-        // Retrieve the user by userId
-        User user = userRepository.findById(userId).orElse(null);
-
-        // Check if the user exists and if the questionnaire_score is calculated
-        if (user != null && user.getQuestionnaireScore() != null) {
-            return user.getQuestionnaireScore();
+    public User updateGameLevel(long user_id, int gameLevel) {
+        User user = userRepository.findById(user_id).orElse(null);
+        if (user != null) {
+            user.setGameLevel(gameLevel);
+            userRepository.save(user);
+            return user;
+        } else {
+            return null;
         }
+    }
 
-        // Return null if the user or questionnaire_score is not found
-        return null;
+    public User updateGameCoin(long user_id, int gameCoin) {
+        User user = userRepository.findById(user_id).orElse(null);
+        if (user != null) {
+            user.setGameCoin(gameCoin);
+            userRepository.save(user);
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    public User updateQuestionnaireScore(long user_id, int score) {
+        User user = userRepository.findById(user_id).orElse(null);
+        if (user != null) {
+            user.setQuestionnaireScore(score);
+            userRepository.save(user);
+            return user;
+        } else {
+            return null;
+        }
     }
 
 
+    public Integer getQuestionnaireScore(int userId) {
+        User user = userRepository.findById((long) userId).orElse(null);;
+        assert user != null;
+        return user.getQuestionnaireScore();
+    }
+
+    public Integer getGameCoin(int userId) {
+        User user = userRepository.findById((long) userId).orElse(null);;
+        assert user != null;
+        return user.getGameCoin();
+    }
 
 
+    public Integer getGameLevel(int userId) {
+        User user = userRepository.findById((long) userId).orElse(null);;
+        assert user != null;
+        return user.getGameLevel();
+    }
 
-
-
-
-
-
-
+    public Integer getEnergyCoin(int userId) {
+        User user = userRepository.findById((long) userId).orElse(null);;
+        assert user != null;
+        return user.getEnergyCoin();
+    }
 }

@@ -40,7 +40,7 @@ public class UserController {
 
     // End point to get questionnaire score of a user
     @GetMapping("/score/{user_id}")
-    public ResponseEntity<?> getQuestionnaireScore(@PathVariable long user_id, @RequestHeader("Authorization") String token) {
+    public ResponseEntity<?> getQuestionnaireScore(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
         String userName = this.userService.getUserById(user_id).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
         if (responseEntity != null) return responseEntity;
@@ -77,6 +77,63 @@ public class UserController {
         if (responseEntity != null) return responseEntity;
 
         return ResponseEntity.ok(userService.updateQuestionnaireScore(user_id, score));
+    }
+
+    @PostMapping("level/{user_id}/{gameLevel}")
+    public ResponseEntity<?> updateGameLevel(@PathVariable int user_id, @PathVariable int gameLevel, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
+        if (responseEntity != null) return responseEntity;
+
+        return ResponseEntity.ok(userService.updateGameLevel(user_id, gameLevel));
+    }
+
+    @PostMapping("game/{user_id}/{gameCoin}")
+    public ResponseEntity<?> updateGameCoin(@PathVariable int user_id, @PathVariable int gameCoin, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
+        if (responseEntity != null) return responseEntity;
+
+        return ResponseEntity.ok(userService.updateGameCoin(user_id, gameCoin));
+    }
+
+    @PostMapping("energy/{user_id}/{energyCoin}")
+    public ResponseEntity<?> updateEnergyCoin(@PathVariable int user_id, @PathVariable int energyCoin, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
+        if (responseEntity != null) return responseEntity;
+
+        return ResponseEntity.ok(userService.updateEnergyCoin(user_id, energyCoin));
+    }
+
+    @GetMapping("/level/{user_id}")
+    public ResponseEntity<?> getGameLevel(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
+        if (responseEntity != null) return responseEntity;
+
+        Integer level = userService.getGameLevel(user_id);
+        return ResponseEntity.ok(level);
+    }
+
+    @GetMapping("/game/{user_id}")
+    public ResponseEntity<?> getGameCoin(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
+        if (responseEntity != null) return responseEntity;
+
+        Integer gameCoin = userService.getGameCoin(user_id);
+        return ResponseEntity.ok(gameCoin);
+    }
+
+    @GetMapping("/energy/{user_id}")
+    public ResponseEntity<?> getEnergyCoin(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
+        String userName = this.userService.getUserById(user_id).getUserName();
+        ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
+        if (responseEntity != null) return responseEntity;
+
+        Integer energyCoin = userService.getEnergyCoin(user_id);
+        return ResponseEntity.ok(energyCoin);
     }
 }
 
