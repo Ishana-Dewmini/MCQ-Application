@@ -25,6 +25,8 @@ public class ResponseController {
     @PostMapping("/responses/{userId}")
     public ResponseEntity<?> saveResponse(@PathVariable("userId") Integer userId, @RequestBody Integer[] responseArray, @RequestHeader("Authorization") String token) {
         try {
+            if (this.userService.getUserById(userId)==null)
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             String userName = this.userService.getUserById(userId).getUserName();
             ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
             if (responseEntity != null) return responseEntity;
@@ -40,6 +42,8 @@ public class ResponseController {
     @GetMapping("/responses/{userId}")
     public ResponseEntity<?> getResponse(@PathVariable("userId") Integer userId, @RequestHeader("Authorization") String token) {
         try {
+            if (this.userService.getUserById(userId)==null)
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
             String userName = this.userService.getUserById(userId).getUserName();
             ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
             if (responseEntity != null) return responseEntity;

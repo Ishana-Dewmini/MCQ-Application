@@ -1,4 +1,5 @@
 package com.energygame.mcqapplication.Controller;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.energygame.mcqapplication.Config.JwtTokenProvider;
 import com.energygame.mcqapplication.Model.User;
@@ -30,109 +31,137 @@ public class UserController {
     // End point to find user by userId
     @GetMapping("/id/{user_id}")
     public ResponseEntity<?> getUserById(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(user_id)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
         String userName = this.userService.getUserById(user_id).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
-        if (responseEntity != null) return responseEntity;
-
+        if (responseEntity != null)
+            return responseEntity;
         User user = userService.getUserById(user_id);
         return ResponseEntity.ok(user);
     }
 
     // End point to get questionnaire score of a user
-    @GetMapping("/score/{user_id}")
-    public ResponseEntity<?> getQuestionnaireScore(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    @GetMapping("/score/{userId}")
+    public ResponseEntity<?> getQuestionnaireScore(@PathVariable int userId, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
-        if (responseEntity != null) return responseEntity;
-
-        Integer score = userService.getQuestionnaireScore(user_id);
+        if (responseEntity != null)
+            return responseEntity;
+        Integer score = userService.getQuestionnaireScore(userId);
         return ResponseEntity.ok(score);
     }
 
     // End point to update profile updating status of a user
-    @PostMapping("profile/{user_id}")
-    public ResponseEntity<?> updateProfileStatus(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    @PostMapping("profile/{userId}")
+    public ResponseEntity<?> updateProfileStatus(@PathVariable int userId, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
-        if (responseEntity != null) return responseEntity;
-
-        return ResponseEntity.ok(userService.updateProfileStatus(user_id));
+        if (responseEntity != null)
+            return responseEntity;
+        return ResponseEntity.ok(userService.updateProfileStatus(userId));
     }
 
     // End point to update questionnaire status of a user
-    @PostMapping("questionnaire/{user_id}")
-    public ResponseEntity<?> updateQuestionnaireStatus(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    @PostMapping("questionnaire/{userId}")
+    public ResponseEntity<?> updateQuestionnaireStatus(@PathVariable int userId, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
         if (responseEntity != null) return responseEntity;
 
-        return ResponseEntity.ok(userService.updateQuestionnaireStatus(user_id));
+        return ResponseEntity.ok(userService.updateQuestionnaireStatus(userId));
     }
 
     // End point to update questionnaire score of a user
-    @PostMapping("score/{user_id}/{score}")
-    public ResponseEntity<?> updateQuestionnaireScore(@PathVariable int user_id, @PathVariable int score, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    @PostMapping("score/{userId}/{score}")
+    public ResponseEntity<?> updateQuestionnaireScore(@PathVariable int userId, @PathVariable int score, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
-        if (responseEntity != null) return responseEntity;
-
-        return ResponseEntity.ok(userService.updateQuestionnaireScore(user_id, score));
+        if (responseEntity != null)
+            return responseEntity;
+        return ResponseEntity.ok(userService.updateQuestionnaireScore(userId, score));
     }
 
-    @PostMapping("level/{user_id}/{gameLevel}")
-    public ResponseEntity<?> updateGameLevel(@PathVariable int user_id, @PathVariable int gameLevel, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    // End point to update questionnaire game level of a user
+    @PostMapping("level/{userId}/{gameLevel}")
+    public ResponseEntity<?> updateGameLevel(@PathVariable int userId, @PathVariable int gameLevel, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
         if (responseEntity != null) return responseEntity;
 
-        return ResponseEntity.ok(userService.updateGameLevel(user_id, gameLevel));
+        return ResponseEntity.ok(userService.updateGameLevel(userId, gameLevel));
     }
 
-    @PostMapping("game/{user_id}/{gameCoin}")
-    public ResponseEntity<?> updateGameCoin(@PathVariable int user_id, @PathVariable int gameCoin, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    // End point to update game coin value of a user
+    @PostMapping("game/{userId}/{gameCoin}")
+    public ResponseEntity<?> updateGameCoin(@PathVariable int userId, @PathVariable int gameCoin, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
         if (responseEntity != null) return responseEntity;
 
-        return ResponseEntity.ok(userService.updateGameCoin(user_id, gameCoin));
+        return ResponseEntity.ok(userService.updateGameCoin(userId, gameCoin));
     }
 
-    @PostMapping("energy/{user_id}/{energyCoin}")
-    public ResponseEntity<?> updateEnergyCoin(@PathVariable int user_id, @PathVariable int energyCoin, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    // End point to update energy coin value of a user
+    @PostMapping("energy/{userId}/{energyCoin}")
+    public ResponseEntity<?> updateEnergyCoin(@PathVariable int userId, @PathVariable int energyCoin, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
         if (responseEntity != null) return responseEntity;
 
-        return ResponseEntity.ok(userService.updateEnergyCoin(user_id, energyCoin));
+        return ResponseEntity.ok(userService.updateEnergyCoin(userId, energyCoin));
     }
 
-    @GetMapping("/level/{user_id}")
-    public ResponseEntity<?> getGameLevel(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    // End point to get questionnaire game level of a user
+    @GetMapping("/level/{userId}")
+    public ResponseEntity<?> getGameLevel(@PathVariable int userId, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
         if (responseEntity != null) return responseEntity;
 
-        Integer level = userService.getGameLevel(user_id);
+        Integer level = userService.getGameLevel(userId);
         return ResponseEntity.ok(level);
     }
 
-    @GetMapping("/game/{user_id}")
-    public ResponseEntity<?> getGameCoin(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    // End point to get game coin value of a user
+    @GetMapping("/game/{userId}")
+    public ResponseEntity<?> getGameCoin(@PathVariable int userId, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
         if (responseEntity != null) return responseEntity;
 
-        Integer gameCoin = userService.getGameCoin(user_id);
+        Integer gameCoin = userService.getGameCoin(userId);
         return ResponseEntity.ok(gameCoin);
     }
 
-    @GetMapping("/energy/{user_id}")
-    public ResponseEntity<?> getEnergyCoin(@PathVariable int user_id, @RequestHeader("Authorization") String token) {
-        String userName = this.userService.getUserById(user_id).getUserName();
+    // End point to get energy coin value of a user
+    @GetMapping("/energy/{userId}")
+    public ResponseEntity<?> getEnergyCoin(@PathVariable int userId, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
         ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
         if (responseEntity != null) return responseEntity;
 
-        Integer energyCoin = userService.getEnergyCoin(user_id);
+        Integer energyCoin = userService.getEnergyCoin(userId);
         return ResponseEntity.ok(energyCoin);
     }
 }
