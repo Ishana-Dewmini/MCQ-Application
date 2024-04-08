@@ -44,7 +44,6 @@ const Quiz = ({ questions }) => {
     if (currentQuestion < questions.length) {
       setCurrentQuestion((prev) => prev + 1);
     } else {
-      setCurrentQuestion(1);
       const score = calculateScore();
       saveResponses(id, reviewData).then(() => {
         // Upon successful saving of responses

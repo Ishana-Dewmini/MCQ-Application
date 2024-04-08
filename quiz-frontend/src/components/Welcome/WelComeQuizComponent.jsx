@@ -12,10 +12,8 @@ const WelcomeQuizComponent = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [profileCompleted, setProfileCompleted] = useState(true);
   const [reviewData, setReviewData] = useState([]);
-  
 
   const { token, id } = useParams();
- 
 
   async function quizCompletedStatus(id) {
     try {
@@ -44,20 +42,19 @@ const WelcomeQuizComponent = () => {
     else if (!profileCompleted)
     {
       alert('Update Player Profile first!!');
-      navigate('/errorPage');
+      navigate('/errorProfile');
     }
 
     else {
+      document.querySelector('body').style.overflow = 'hidden';
+      document.querySelector('body').scrollTo(0, 0);
 
-        document.querySelector('body').style.overflow = 'hidden';
-        document.querySelector('body').scrollTo(0, 0);
-
-        setTimeout(() => {
-          
-        document.querySelector('body').style.overflow = 'auto';
-        setShowAnim(false);
-      
-        }, 3000);
+      setTimeout(() => {
+        
+      document.querySelector('body').style.overflow = 'auto';
+      setShowAnim(false);
+    
+    }, 3000);
     }
   }, [quizCompleted,profileCompleted])
 
@@ -69,11 +66,11 @@ const WelcomeQuizComponent = () => {
 
   return (
     <>
-    <WelcomeAnim showAnim={showAnim}/>
+    <WelcomeAnim showAnim={showAnim} />
 
     <div>
       <h1 className='container1'>
-        Welcome to <span>Energy Saving Game Questionnaire</span>
+         <span>Introduction About the Quiz</span>
       </h1>
 
       <p className='container2'>
@@ -108,48 +105,3 @@ const WelcomeQuizComponent = () => {
 
 export default WelcomeQuizComponent;
 
-
-
-
-
-
-
-
-
-
-
-
-  // async function getQuizCompleted(id) {
-  //   try {
-  //     const response = await isQuizCompleted(id);
-  //     console.log(response.data);
-  //     setQuizCompleted(response.data.questionnaireTaken);
-  //     console.log("Quiz completed? " + response.data.questionnaireTaken); // Log the updated value
-  //   } catch (error) {
-  //     console.error('Error:', error);
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   const {id}  = 1;
-  //   getQuizCompleted(id); // Call the async function
-  
-  //   if (quizCompleted) {    
-  //     getResponses(id).then((data) => {
-  //       setReviewData(data);
-  //       console.log(data);
-  //       navigate(`/review/${id}`, { state: { results: reviewData } }); // Use the 'data' received in the callback
-  //     }).catch((error) => { 
-  //       console.error('Error:', error);
-  //     });
-  //   } else {
-  //     document.querySelector('body').style.overflow = 'hidden';
-  //     document.querySelector('body').scrollTo(0, 0);
-  
-  //     setTimeout(() => {
-  //       document.querySelector('body').style.overflow = 'auto';
-  //       setShowAnim(false);
-  //     }, 3000);
-  //   }
-  // }, [id, quizCompleted]); // Add 'id' and 'quizCompleted' to the dependency array
-  
