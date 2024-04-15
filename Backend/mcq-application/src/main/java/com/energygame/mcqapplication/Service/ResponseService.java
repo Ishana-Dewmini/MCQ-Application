@@ -1,10 +1,8 @@
 package com.energygame.mcqapplication.Service;
-
 import com.energygame.mcqapplication.Model.Response;
 import com.energygame.mcqapplication.Repository.ResponseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.Optional;
 
@@ -14,6 +12,7 @@ public class ResponseService {
     @Autowired
     private ResponseRepository responseRepository;
 
+    // Method to save the responses for questionnaire of a user
     public void saveResponse(Integer userId, Integer[] responseArray) {
         Response response = new Response();
         response.setUserId(userId);
@@ -23,6 +22,7 @@ public class ResponseService {
         responseRepository.save(response);
     }
 
+    // Method to get the responses for questionnaire of a user
     public Integer[] getResponseByUserId(Integer userId) {
         Optional<Response> optionalResponse = responseRepository.findById(Long.valueOf(userId));
         if (optionalResponse.isPresent()) {
@@ -30,8 +30,8 @@ public class ResponseService {
             // Convert string back to integer array
             String[] parts = responseString.substring(1, responseString.length() - 1).split(", ");
             Integer[] responseArray = new Integer[parts.length];
-            for (int i = 0; i < parts.length; i++) {
-                responseArray[i] = Integer.parseInt(parts[i]);
+            for (int index = 0; index < parts.length; index++) {
+                responseArray[index] = Integer.parseInt(parts[index]);
             }
             return responseArray;
         } else {

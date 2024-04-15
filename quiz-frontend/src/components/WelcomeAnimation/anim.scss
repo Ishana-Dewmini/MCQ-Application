@@ -16,6 +16,9 @@
         animation-fill-mode: forwards;
         animation-iteration-count: 1;
         animation-timing-function:ease-out;
+        color: #e2dcdc;
+        text-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); 
+        border-radius: 10px;
     }
 }
 
@@ -24,7 +27,12 @@
     from {
         font-size: 1vw;
         
+        
     }to{
-        font-size: 5vw;
+        font-size: 4.5vw;
     }
 }
+
+
+
+

@@ -3,25 +3,42 @@
 $bg1: #b5c83a;
 $bg2: #8da7c2;
 
-
 .container1 {
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    width: 500px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    width: 70%;
     background: $bg1;
     border-radius: 20px;
-    margin-top: 80px;
-    padding: 20px 60px;
-    box-sizing:content-box;
-    align-items:center;
+    margin: 80px auto;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: center;
+    text-shadow: #040404;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle box shadow */
+}
+
+.container1 span {
+    color: #fff; /* Makes the span text white */
 }
 
 .container2 {
-    font-family:Georgia, 'Times New Roman', Times, serif;
-    width: 500px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    width: 70%;
     background: $bg2;
     border-radius: 20px;
-    margin-top: 80px;
-    padding: 20px 60px;
-    box-sizing:content-box;
-    align-items:center;
+    margin: 40px auto;
+    padding: 30px;
+    box-sizing: border-box;
+    text-align: justify; /* Justifies the text */
+    line-height: 1.6; /* Increases line spacing for better readability */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adds a subtle box shadow */
 }
+
+.container2 strong {
+    color: #040404; /* Makes the strong text darker */
+}
+
+.container2 br {
+    margin-bottom: 10px; /* Adds space between paragraphs */
+}
+
+

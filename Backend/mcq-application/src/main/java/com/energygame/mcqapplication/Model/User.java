@@ -14,8 +14,8 @@ public class User {
     @Column(name = "user_id")
     private Integer userId;
 
-    @Column(name = "API_key")
-    private String apiKey;
+    @Column(name = "user_name ")
+    private String userName;
 
     @Column(name = "profile_edited")
     private boolean profileEdited;
@@ -26,5 +26,12 @@ public class User {
     @Column(name = "questionnaire_score")
     private Integer questionnaireScore;
 
+    @Column(name = "game_level")
+    private Integer gameLevel;
 
+    @Column(name = "energy_coin")
+    private Integer energyCoin;
+
+    @Column(name = "game_coin")
+    private Integer gameCoin;
 }

@@ -3,7 +3,7 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { quizQuestions } from '../../questions/Questions';
 import { getResponses,isQuizCompleted } from '../../services/ResponseService';
 import Button from '@mui/material/Button';
-// import '../Quiz/Quiz.scss';
+import LoadingAnim from '../Loading/Loading';
 import './Review.scss';
 
 const ReviewComponent = () => {
@@ -13,8 +13,8 @@ const ReviewComponent = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [correctAnswerCount, setCorrectAnswerCount] = useState();
   const [score, setScore] = useState(0);
+  const [showAnim, setShowAnim] = useState(true);
 
-  const navigate = useNavigate();
   const { id } = useParams();
 
   async function quizCompletedScoreStatus(id) {
@@ -29,6 +29,17 @@ const ReviewComponent = () => {
   }
 
   useEffect(() => {
+
+    document.querySelector('body').style.overflow = 'hidden';
+    document.querySelector('body').scrollTo(0, 0);
+
+    setTimeout(() => {
+      
+    document.querySelector('body').style.overflow = 'auto';
+    setShowAnim(false);
+  
+    }, 2000);
+
     quizCompletedScoreStatus(id);
   }, [id]);
 
@@ -83,7 +94,7 @@ const ReviewComponent = () => {
         )}
         <p className="review-given-answer">{`Given Answer: ${item.givenAnswer}`}</p>
         <p className="review-correct-answer">{`Correct Answer: ${item.correctAnswer}`}</p>
-        <p className="review-correctness">{`Your answer is ${item.answerStatus ? 'correct' : 'wrong'}`}</p>
+        <p className="review-correctness">{`Your answer is ${item.answerStatus ? 'Correct !' : 'Wrong !'}`}</p>
         <p className="review-general-feedback">{`General Feedback: ${item.generalFeedback}`}</p>
         <p className="review-specific-feedback">{`Specific Feedback: ${item.specificFeedback}`}</p>
       </div>
@@ -106,21 +117,24 @@ const ReviewComponent = () => {
       } else if (choice === item.givenAnswer) {
         return "wrong-answer"; // Apply red background
       }
+      
     }
-    return ""; // Default class
+    return "other-answer"; // Default class
   };
   
   
 
   const gameEnvironment = () => {
-    
-  }
-
+    window.location.href = 'http://localhost:51915/';
+  };
+  
 
   let wrongAnswerCount = reviewedQuestions.length - correctAnswerCount;
   
   return (
     <div className='text-center'>
+      <LoadingAnim showAnim={showAnim} />
+      
         <div className="review-header">
           <h1>Result</h1>
           <br />
@@ -141,9 +155,9 @@ const ReviewComponent = () => {
       <div className="review-container">
           <h2>Review Answers:</h2>
           {renderReviewItems()}
-
+        
         <center>
-          <Button variant="contained" color="primary" onClick={gameEnvironment}>
+          <Button variant="contained" color="success" onClick={gameEnvironment}>
           Go to Game Environment
           </Button> 
         </center>

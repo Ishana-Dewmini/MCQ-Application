@@ -51,7 +51,7 @@
     .review-container {
         width: 800px;
         background: $bg;
-        border-radius: 4px;
+        border-radius: 30px;
         margin-top: 80px;
         padding: 30px 60px;
         box-sizing: border-box;
@@ -68,38 +68,36 @@
 
 .review-item {
     background: linear-gradient(135deg, #f6c9ff, #9d81fc);
-    border: 1px solid #d1d1d1;
-    border-radius: 16px;
-    padding: 20px;
+    border-radius: 20px;
+    padding: 30px;
     margin-top: 20px;
+    margin-bottom: 40px;
     display: flex;
     flex-direction: column;
     cursor:default;
     gap: 10px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease-in-out;
   }
   
   .review-item:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
   }
   
   .review-question {
-    font-size: 18px;
+    font-size: 23px;
     font-weight: bold;
-    margin: 0;
+    margin-bottom: 20px;
   }
 
 ul {
-    list-style-type: decimal;
-    margin-top: 10px;
+    list-style-type:decimal;
+    margin-top: 20px;
     padding-left: 0;
-    width: fit-content;
-    height: fit-content;
     margin: 0 auto; /* Center the ul horizontally */
   }
   
   ul li {
-    color: #4a4a4a;
+    color: #060606;
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 10px;
@@ -109,14 +107,43 @@ ul {
   }
   
   
-  .review-given-answer,
-  .review-correct-answer,
-  .review-correctness,
-  .review-general-feedback,
-  .review-specific-feedback {
+  .review-given-answer
+    {
+      margin-top: 15px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #ee1111;
+      margin-bottom: 3px;
+    }
+  
+  .review-correct-answer
+    {
+      font-size: 18px;
+      font-weight: 500;
+      color: #000000;
+      margin-bottom: 3px;
+    }
+  
+  .review-correctness
+    {
+      font-size: 18px;
+      font-weight: 500;
+      color: #a1f504;
+      margin-bottom: 3px;
+      
+    }
+  .review-general-feedback
+  {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-size: 14px;
     font-weight: 500;
-    color: #6c757d;
+    color: #555c43;
+  }
+  .review-specific-feedback {
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #ee0a0a;
   }
    .other-answer {
     background-color: #add8e6; /* Light blue for other answers */
@@ -129,6 +156,8 @@ ul {
   .wrong-answer {
     background-color:  #ff7f7f; /* Red background for wrong answer */
   }
+
+
 
   
   

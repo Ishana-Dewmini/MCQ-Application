@@ -11,7 +11,7 @@ const WelcomeAnim = (props) => {
          {display: 'grid' }
          :
           {display: 'none'} }>
-        <h2>Welcome To Energy Saving Questionnaire</h2>
+        <h2>Welcome To Energy Saving Game Questionnaire</h2>
     </div>
 
     </>
