@@ -1,29 +1,34 @@
 package com.energygame.mcqapplication.Config;
 import io.jsonwebtoken.*;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
 import java.util.Base64;
 
 @Component
 public class JwtTokenProvider {
 
-    // Define your secret key
-    private static final String SECRET_KEY = "sgdsgfdhfghghhfhkawgkdsmjdbsnmcbwhjgyjweyuwqgdhawghdkgwhfdgwhkgdywafywgfhasgkassgdkjadgawhkafjfhagfkawfgk";
+    private final String secretKey;
 
-    // Method to generate JWT token
+    // Constructor accepting secret key parameter
+    public JwtTokenProvider(String secretKey) {
+        this.secretKey = secretKey;
+    }
+
+
+
+// Method to generate JWT token
     public String generateToken(String userName) {
         try {
             return Jwts.builder()
                     .setSubject(userName)
                     // Add additional claims or information if needed
-                    .signWith(SignatureAlgorithm.HS512, SECRET_KEY)
+                    .signWith(SignatureAlgorithm.HS512, secretKey)
                     .compact();
-        }catch (Exception e) {
-            return "Error";
+        } catch (Exception e) {
+            return "Error generating token";
         }
-
     }
 
     // Method to decode the payload of a JWT token
@@ -34,18 +39,16 @@ public class JwtTokenProvider {
             String payload = new String(decoder.decode(chunks[1]));
             System.out.println(payload);
             JSONObject jsonObject = new JSONObject(payload);
-            String userName = jsonObject.getString("sub");
-            return userName;
+            return jsonObject.getString("sub");
         } catch (Exception e) {
-            return "Error";
+            return "Error decoding token";
         }
     }
-
 
     // Method to validate a JWT token
     public ResponseEntity<?> validateToken(String token, String userName) {
         try {
-            String generatedToken = "Bearer "+generateToken(userName);
+            String generatedToken = "Bearer " + generateToken(userName);
             if (!token.equals(generatedToken)) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized");
             } else {
@@ -56,4 +59,3 @@ public class JwtTokenProvider {
         }
     }
 }
-
