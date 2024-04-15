@@ -7,6 +7,11 @@ import './updateError.scss'; // Import the SCSS file
 
 const ProfileErrorComponent = () => {
 
+  
+  const gameEnvironment = () => {
+    window.location.href = 'http://localhost:51915/';
+  };
+  
 
   return (
     <>
@@ -17,8 +22,8 @@ const ProfileErrorComponent = () => {
         </Alert>
       </Stack>
     <center>
-      <Button variant="contained" color="success" style={{ marginBottom: '50px' }}>
-        Update Profile
+      <Button variant="contained" color="success" onClick={gameEnvironment} style={{ marginBottom: '50px' }}>
+        Goto Game Environment
       </Button>
     </center>
     </div>

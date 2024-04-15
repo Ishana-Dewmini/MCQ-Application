@@ -4,7 +4,6 @@ import { quizQuestions } from '../../questions/Questions';
 import { getResponses,isQuizCompleted } from '../../services/ResponseService';
 import Button from '@mui/material/Button';
 import LoadingAnim from '../Loading/Loading';
-// import '../Quiz/Quiz.scss';
 import './Review.scss';
 
 const ReviewComponent = () => {
@@ -16,7 +15,6 @@ const ReviewComponent = () => {
   const [score, setScore] = useState(0);
   const [showAnim, setShowAnim] = useState(true);
 
-  const navigate = useNavigate();
   const { id } = useParams();
 
   async function quizCompletedScoreStatus(id) {
@@ -127,9 +125,9 @@ const ReviewComponent = () => {
   
 
   const gameEnvironment = () => {
-    
-  }
-
+    window.location.href = 'http://localhost:51915/';
+  };
+  
 
   let wrongAnswerCount = reviewedQuestions.length - correctAnswerCount;
   
