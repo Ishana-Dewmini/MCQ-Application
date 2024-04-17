@@ -83,12 +83,12 @@ const WelcomeQuizComponent = () => {
         <br />
         2. <strong>Answers and Scores:</strong> After answering all the questions, you'll be able to view your results. You'll see which questions you got right and which ones you got wrong, along with the correct answers. For each correct answer, you'll earn 10 marks.
         <br />
-        3. <strong>Coins:</strong> The marks you earn in this quiz will be converted into coins in your game environment. These coins can be used for various purposes within the game, helping you progress further and achieve your goals.
+        3. <strong>Lands:</strong> The marks you earn in this quiz will be converted into lands in your game environment. These lands can be used for growing more plants within the game, helping you progress further and achieve your goals.
         <br />
         4. <strong>One Chance Only:</strong> Keep in mind that you only get one chance to take this questionnaire. Once you've completed it, you won't be able to retake it. So make the most of this opportunity to test your knowledge and earn some coins for your game!
         <br />
         <br />
-        Are you ready to put your energy knowledge to the test and earn some coins? Let's get started! Good luck! 🌟
+        Are you ready to put your energy knowledge to the test and earn some lands to grow your fram? Let's get started! Good luck! 🌟
       </p>
     <center>
       <Button variant="contained" color="success" onClick={handleBegin} style={{ marginBottom: '50px' }}>
