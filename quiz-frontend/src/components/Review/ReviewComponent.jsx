@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import { quizQuestions } from '../../questions/Questions';
 import { getResponses,isQuizCompleted } from '../../services/ResponseService';
-import Button from '@mui/material/Button';
 import LoadingAnim from '../Loading/Loading';
 import './Review.scss';
 
@@ -122,12 +121,6 @@ const ReviewComponent = () => {
     return "other-answer"; // Default class
   };
   
-  
-
-  const gameEnvironment = () => {
-    window.location.href = 'http://localhost:51915/';
-  };
-  
 
   let wrongAnswerCount = reviewedQuestions.length - correctAnswerCount;
   
@@ -155,12 +148,7 @@ const ReviewComponent = () => {
       <div className="review-container">
           <h2>Review Answers:</h2>
           {renderReviewItems()}
-        
-        <center>
-          <Button variant="contained" color="success" onClick={gameEnvironment}>
-          Go to Game Environment
-          </Button> 
-        </center>
+
       </div>
     </div>
   );

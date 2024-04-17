@@ -2,7 +2,6 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import { quizQuestions } from './questions/Questions'
 import ReviewComponent from './components/Review/ReviewComponent'
 import ProfileErrorComponent from './components/ErrorPage/ProfileErrorComponent'
-import ErrorPageComponent from './components/ErrorPage/ErrorPageComponent'
 import WelComeQuizComponent from './components/Welcome/WelComeQuizComponent'
 import Quiz from './components/Quiz/Quiz'
 
@@ -23,11 +22,7 @@ function App() {
           <Route path="/review/:id" element={<ReviewComponent />} />
           {/* // http://localhost:3000/errorProfile */}
           <Route path="/errorProfile" element={<ProfileErrorComponent />} /> 
-    
-          {/* // http://localhost:3000/ */}
-          {/* <Route path="*" element={<ErrorPageComponent />} />  */}
-
-           
+       
           </Routes>         
       </BrowserRouter>
     </>
