@@ -34,4 +34,7 @@ public class User {
 
     @Column(name = "game_coin")
     private Integer gameCoin;
+
+    @Column(name = "lands")
+    private Integer lands;
 }

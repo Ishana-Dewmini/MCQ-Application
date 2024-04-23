@@ -126,6 +126,18 @@ public class UserController {
         return ResponseEntity.ok(userService.updateEnergyCoin(userId, energyCoin));
     }
 
+    // End point to update lands of a user
+    @PostMapping("lands/{userId}/{lands}")
+    public ResponseEntity<?> updateLands(@PathVariable int userId, @PathVariable int lands, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
+        ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
+        if (responseEntity != null) return responseEntity;
+
+        return ResponseEntity.ok(userService.updateLands(userId, lands));
+    }
+
     // End point to get questionnaire game level of a user
     @GetMapping("/level/{userId}")
     public ResponseEntity<?> getGameLevel(@PathVariable int userId, @RequestHeader("Authorization") String token) {
@@ -163,6 +175,20 @@ public class UserController {
 
         Integer energyCoin = userService.getEnergyCoin(userId);
         return ResponseEntity.ok(energyCoin);
+    }
+
+
+    // End point to get Lands of a user
+    @GetMapping("/lands/{userId}")
+    public ResponseEntity<?> getLands(@PathVariable int userId, @RequestHeader("Authorization") String token) {
+        if (this.userService.getUserById(userId)==null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+        String userName = this.userService.getUserById(userId).getUserName();
+        ResponseEntity<?> responseEntity = jwtTokenProvider.validateToken(token,userName);
+        if (responseEntity != null) return responseEntity;
+
+        Integer lands = userService.getLands(userId);
+        return ResponseEntity.ok(lands);
     }
 }
 

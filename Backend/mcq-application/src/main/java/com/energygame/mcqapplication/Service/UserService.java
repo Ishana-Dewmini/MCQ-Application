@@ -39,6 +39,7 @@ public class UserService {
             user.setGameLevel(1);
             user.setEnergyCoin(0);
             user.setGameCoin(0);
+            user.setLands(0);
             userRepository.save(user);
             int userID = userRepository.findByUserName(userName).getUserId();
             response.put("userID", userID);
@@ -106,11 +107,21 @@ public class UserService {
 
     }
 
-    // Method to update questionnaire score of a user of a user
+    // Method to update questionnaire score of  a user
     public User updateQuestionnaireScore(long user_id, int score) {
         User user = userRepository.findById(user_id).orElse(null);
         assert user != null;
         user.setQuestionnaireScore(score);
+        userRepository.save(user);
+        return user;
+
+    }
+
+    // Method to update Lands  of a user
+    public User updateLands(long user_id, int lands) {
+        User user = userRepository.findById(user_id).orElse(null);
+        assert user != null;
+        user.setLands(lands);
         userRepository.save(user);
         return user;
 
@@ -143,4 +154,13 @@ public class UserService {
         assert user != null;
         return user.getEnergyCoin();
     }
+
+    // Method to get energy coin value of a user
+    public Integer getLands(int userId) {
+        User user = userRepository.findById((long) userId).orElse(null);
+        assert user != null;
+        return user.getLands();
+    }
+
+
 }
