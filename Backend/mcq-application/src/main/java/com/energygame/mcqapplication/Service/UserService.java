@@ -36,9 +36,6 @@ public class UserService {
             user.setProfileEdited(false);
             user.setQuestionnaireTaken(false);
             user.setQuestionnaireScore(0);
-            user.setGameLevel(1);
-            user.setEnergyCoin(0);
-            user.setGameCoin(0);
             userRepository.save(user);
             int userID = userRepository.findByUserName(userName).getUserId();
             response.put("userID", userID);
@@ -76,35 +73,6 @@ public class UserService {
 
     }
 
-    //Method to update energy coin value of a user
-    public User updateEnergyCoin(long user_id, int energyCoin) {
-        User user = userRepository.findById(user_id).orElse(null);
-        assert user != null;
-        user.setEnergyCoin(energyCoin);
-        userRepository.save(user);
-        return user;
-
-    }
-
-    //Method to update game level of a user
-    public User updateGameLevel(long user_id, int gameLevel) {
-        User user = userRepository.findById(user_id).orElse(null);
-        assert user != null;
-        user.setGameLevel(gameLevel);
-        userRepository.save(user);
-        return user;
-
-    }
-
-    //Method to update game coin value of a user
-    public User updateGameCoin(long user_id, int gameCoin) {
-        User user = userRepository.findById(user_id).orElse(null);
-        assert user != null;
-        user.setGameCoin(gameCoin);
-        userRepository.save(user);
-        return user;
-
-    }
 
     // Method to update questionnaire score of a user of a user
     public User updateQuestionnaireScore(long user_id, int score) {
@@ -123,24 +91,5 @@ public class UserService {
         return user.getQuestionnaireScore();
     }
 
-    //Method to get game coin value of a user
-    public Integer getGameCoin(int userId) {
-        User user = userRepository.findById((long) userId).orElse(null);
-        assert user != null;
-        return user.getGameCoin();
-    }
 
-    // Method to get game level of a user
-    public Integer getGameLevel(int userId) {
-        User user = userRepository.findById((long) userId).orElse(null);
-        assert user != null;
-        return user.getGameLevel();
-    }
-
-    // Method to get energy coin value of a user
-    public Integer getEnergyCoin(int userId) {
-        User user = userRepository.findById((long) userId).orElse(null);
-        assert user != null;
-        return user.getEnergyCoin();
-    }
 }

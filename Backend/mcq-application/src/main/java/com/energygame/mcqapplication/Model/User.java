@@ -26,12 +26,4 @@ public class User {
     @Column(name = "questionnaire_score")
     private Integer questionnaireScore;
 
-    @Column(name = "game_level")
-    private Integer gameLevel;
-
-    @Column(name = "energy_coin")
-    private Integer energyCoin;
-
-    @Column(name = "game_coin")
-    private Integer gameCoin;
 }
